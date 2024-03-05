@@ -4,14 +4,14 @@
     "/Users/kamil/Documents/LabAPI/src/LabAPI.Infrastructure/LabAPI.Infrastructure.csproj": {}
   },
   "projects": {
-    "/Users/kamil/Documents/LabAPI/src/LabAPI.Infrastructure/LabAPI.Infrastructure.csproj": {
+    "/Users/kamil/Documents/LabAPI/src/LabAPI.Application/LabAPI.Application.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/kamil/Documents/LabAPI/src/LabAPI.Infrastructure/LabAPI.Infrastructure.csproj",
-        "projectName": "LabAPI.Infrastructure",
-        "projectPath": "/Users/kamil/Documents/LabAPI/src/LabAPI.Infrastructure/LabAPI.Infrastructure.csproj",
+        "projectUniqueName": "/Users/kamil/Documents/LabAPI/src/LabAPI.Application/LabAPI.Application.csproj",
+        "projectName": "LabAPI.Application",
+        "projectPath": "/Users/kamil/Documents/LabAPI/src/LabAPI.Application/LabAPI.Application.csproj",
         "packagesPath": "/Users/kamil/.nuget/packages/",
-        "outputPath": "/Users/kamil/Documents/LabAPI/src/LabAPI.Infrastructure/obj/",
+        "outputPath": "/Users/kamil/Documents/LabAPI/src/LabAPI.Application/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/Users/kamil/.nuget/NuGet/NuGet.Config"
@@ -20,6 +20,83 @@
           "net8.0"
         ],
         "sources": {
+          "/usr/local/share/dotnet/library-packs": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {
+              "/Users/kamil/Documents/LabAPI/src/LabAPI.Domain/LabAPI.Domain.csproj": {
+                "projectPath": "/Users/kamil/Documents/LabAPI/src/LabAPI.Domain/LabAPI.Domain.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "dependencies": {
+            "AutoMapper": {
+              "target": "Package",
+              "version": "[13.0.1, )"
+            },
+            "FluentValidation.AspNetCore": {
+              "target": "Package",
+              "version": "[11.3.0, )"
+            },
+            "FluentValidation.DependencyInjectionExtensions": {
+              "target": "Package",
+              "version": "[11.9.0, )"
+            },
+            "MediatR": {
+              "target": "Package",
+              "version": "[12.2.0, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/8.0.100/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "/Users/kamil/Documents/LabAPI/src/LabAPI.Domain/LabAPI.Domain.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/Users/kamil/Documents/LabAPI/src/LabAPI.Domain/LabAPI.Domain.csproj",
+        "projectName": "LabAPI.Domain",
+        "projectPath": "/Users/kamil/Documents/LabAPI/src/LabAPI.Domain/LabAPI.Domain.csproj",
+        "packagesPath": "/Users/kamil/.nuget/packages/",
+        "outputPath": "/Users/kamil/Documents/LabAPI/src/LabAPI.Domain/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/Users/kamil/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "/usr/local/share/dotnet/library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -37,6 +114,70 @@
       "frameworks": {
         "net8.0": {
           "targetAlias": "net8.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/8.0.100/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "/Users/kamil/Documents/LabAPI/src/LabAPI.Infrastructure/LabAPI.Infrastructure.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/Users/kamil/Documents/LabAPI/src/LabAPI.Infrastructure/LabAPI.Infrastructure.csproj",
+        "projectName": "LabAPI.Infrastructure",
+        "projectPath": "/Users/kamil/Documents/LabAPI/src/LabAPI.Infrastructure/LabAPI.Infrastructure.csproj",
+        "packagesPath": "/Users/kamil/.nuget/packages/",
+        "outputPath": "/Users/kamil/Documents/LabAPI/src/LabAPI.Infrastructure/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/Users/kamil/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "/usr/local/share/dotnet/library-packs": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {
+              "/Users/kamil/Documents/LabAPI/src/LabAPI.Application/LabAPI.Application.csproj": {
+                "projectPath": "/Users/kamil/Documents/LabAPI/src/LabAPI.Application/LabAPI.Application.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "dependencies": {
+            "Microsoft.Azure.Cosmos": {
+              "target": "Package",
+              "version": "[3.38.1, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",

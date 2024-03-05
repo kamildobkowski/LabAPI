@@ -1,8 +1,19 @@
 {
   "version": 2,
-  "dgSpecHash": "UyzLuSjObHTDDf1U0aljH3ED0p1wf87Vc4dL+GvTTXSWOeKM8KkOTQDwNp9a5/dV2aedMscWs/L/Hntc94esFQ==",
+  "dgSpecHash": "VgbjKMeIT/ZP/BI5W/uQ4/rJql41TlKnE/A2+g78mZSShYcS44au9DhL6g+BOXHOcMhctzOm24OG1MDlyBUgcg==",
   "success": true,
   "projectFilePath": "/Users/kamil/Documents/LabAPI/src/LabAPI.Application/LabAPI.Application.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "/Users/kamil/.nuget/packages/automapper/13.0.1/automapper.13.0.1.nupkg.sha512",
+    "/Users/kamil/.nuget/packages/fluentvalidation/11.9.0/fluentvalidation.11.9.0.nupkg.sha512",
+    "/Users/kamil/.nuget/packages/fluentvalidation.aspnetcore/11.3.0/fluentvalidation.aspnetcore.11.3.0.nupkg.sha512",
+    "/Users/kamil/.nuget/packages/fluentvalidation.dependencyinjectionextensions/11.9.0/fluentvalidation.dependencyinjectionextensions.11.9.0.nupkg.sha512",
+    "/Users/kamil/.nuget/packages/mediatr/12.2.0/mediatr.12.2.0.nupkg.sha512",
+    "/Users/kamil/.nuget/packages/mediatr.contracts/2.0.1/mediatr.contracts.2.0.1.nupkg.sha512",
+    "/Users/kamil/.nuget/packages/microsoft.extensions.dependencyinjection.abstractions/8.0.0/microsoft.extensions.dependencyinjection.abstractions.8.0.0.nupkg.sha512",
+    "/Users/kamil/.nuget/packages/microsoft.extensions.options/6.0.0/microsoft.extensions.options.6.0.0.nupkg.sha512",
+    "/Users/kamil/.nuget/packages/microsoft.extensions.primitives/6.0.0/microsoft.extensions.primitives.6.0.0.nupkg.sha512",
+    "/Users/kamil/.nuget/packages/system.runtime.compilerservices.unsafe/6.0.0/system.runtime.compilerservices.unsafe.6.0.0.nupkg.sha512"
+  ],
   "logs": []
 }
