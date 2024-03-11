@@ -6,5 +6,5 @@ namespace LabAPI.Domain.Entities;
 public sealed class Order : BaseEntity
 {
 	public PatientData PatientData { get; set; } = null!;
-	public List<TestPanel> Tests { get; set; } = null!;
+	public List<string> Tests { get; set; } = [];
 }
