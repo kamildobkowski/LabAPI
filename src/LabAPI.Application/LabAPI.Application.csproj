@@ -12,8 +12,8 @@
 
   <ItemGroup>
     <Folder Include="Dtos\" />
-    <Folder Include="Features\" />
-    <Folder Include="Interfaces\" />
+    <Folder Include="Features\Orders\Commands\" />
+    <Folder Include="Features\Orders\Queries\" />
     <Folder Include="MappingProfiles\" />
   </ItemGroup>
 

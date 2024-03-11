@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "VgbjKMeIT/ZP/BI5W/uQ4/rJql41TlKnE/A2+g78mZSShYcS44au9DhL6g+BOXHOcMhctzOm24OG1MDlyBUgcg==",
+  "dgSpecHash": "+krPoNNnmP7mvl35c2Ml6EAxphyjFZy4DlUeAaLBzs9+MhL6yK71c9XMVleBjEkazXcQwjAjdO+St3uOGR8h8A==",
   "success": true,
   "projectFilePath": "/Users/kamil/Documents/LabAPI/src/LabAPI.Application/LabAPI.Application.csproj",
   "expectedPackageFiles": [
@@ -13,6 +13,7 @@
     "/Users/kamil/.nuget/packages/microsoft.extensions.dependencyinjection.abstractions/8.0.0/microsoft.extensions.dependencyinjection.abstractions.8.0.0.nupkg.sha512",
     "/Users/kamil/.nuget/packages/microsoft.extensions.options/6.0.0/microsoft.extensions.options.6.0.0.nupkg.sha512",
     "/Users/kamil/.nuget/packages/microsoft.extensions.primitives/6.0.0/microsoft.extensions.primitives.6.0.0.nupkg.sha512",
+    "/Users/kamil/.nuget/packages/newtonsoft.json/13.0.3/newtonsoft.json.13.0.3.nupkg.sha512",
     "/Users/kamil/.nuget/packages/system.runtime.compilerservices.unsafe/6.0.0/system.runtime.compilerservices.unsafe.6.0.0.nupkg.sha512"
   ],
   "logs": []

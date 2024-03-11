@@ -6,9 +6,13 @@ public sealed record PatientData
 {
 	public string? Pesel { get; init; }
 	public DateOnly DateOfBirth { get; init; }
-	public EnSex Sex { get; init; }
+	public EnSex? Sex { get; init; }
 	public Address? Address { get; init; }
 
+	public PatientData()
+	{
+		
+	}
 	public PatientData(string pesel, EnSex sex, Address? address)
 	{
 		Pesel = pesel;

@@ -1,8 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "2BZBLN2nfSrMg270agOBTd48GT6XkbsvjVoTM2MDoITfFGh/Mnc7L3YnpZLqc0GDwOcV/OwfzcP+UME0xpsbpQ==",
+  "dgSpecHash": "u3nW612mI/t3MNkn0ppLMlkrmUDfkenwGWeTXORHexM5gr+TZKKMoj+dKRH73p4ExV4E6NUylF7APgKki2wbzw==",
   "success": true,
   "projectFilePath": "/Users/kamil/Documents/LabAPI/src/LabAPI.Domain/LabAPI.Domain.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "/Users/kamil/.nuget/packages/newtonsoft.json/13.0.3/newtonsoft.json.13.0.3.nupkg.sha512"
+  ],
   "logs": []
 }
