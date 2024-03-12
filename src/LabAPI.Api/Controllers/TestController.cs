@@ -1,5 +1,6 @@
 using LabAPI.Application.Dtos.Tests;
 using LabAPI.Application.Features.Tests.Commands;
+using LabAPI.Application.Features.Tests.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -14,5 +15,12 @@ public class TestController(IMediator mediator) : ControllerBase
 	{
 		await mediator.Send(new CreateTestCommand(dto));
 		return Created();
+	}
+
+	[HttpGet("{shortName}")]
+	public async Task<ActionResult<TestDto>> GetTestFromName([FromRoute] string shortName)
+	{
+		var dto = await mediator.Send(new GetTestFromShortNameQuery(shortName));
+		return Ok(dto);
 	}
 }
