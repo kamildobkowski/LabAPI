@@ -1,19 +1,11 @@
-using System.Runtime.CompilerServices;
 using LabAPI.Domain.Common;
+using LabAPI.Domain.ValueObjects;
 
 namespace LabAPI.Domain.Entities;
 
-public sealed class Test(
-	string name,
-	decimal lowerNorm,
-	decimal higherNorm,
-	string? unit = null,
-	string? shortName = null)
-	: BaseEntity
+public sealed class Test(string name, string? shortName = null) : BaseEntity
 {
 	public string ShortName { get; set; } = shortName ?? name;
 	public string Name { get; set; } = name;
-	public decimal LowerNorm { get; set; } = lowerNorm;
-	public decimal HigherNorm { get; set; } = higherNorm;
-	public string? Unit { get; set; } = unit;
+	public List<Marker> Markers { get; set; } = [];
 }

@@ -6,7 +6,7 @@ using Microsoft.Azure.Cosmos.Linq;
 
 namespace LabAPI.Infrastructure.Repositories;
 
-internal abstract class GenericRepository<T> (CosmosClient cosmosClient) : IRepository<T> where T : BaseEntity
+internal abstract class GenericRepository<T> (CosmosClient cosmosClient) where T : BaseEntity
 {
 	private readonly Container _container = cosmosClient.GetContainer("LabApi", typeof(T).Name + "s");
 	public virtual async Task<T?> GetAsync(Expression<Func<T, bool>> lambda)
@@ -28,13 +28,13 @@ internal abstract class GenericRepository<T> (CosmosClient cosmosClient) : IRepo
 		}
 	}
 
-	public virtual async Task CreateAsync(T entity)
+	public virtual async Task CreateAsync(T entity, string? partitionKey = null)
 		=> await _container.CreateItemAsync(entity);
 
 
-	public virtual async Task UpdateAsync(T entity)
+	public virtual async Task UpdateAsync(T entity, string? partitionKey = null)
 		=> await _container.UpsertItemAsync(entity);
 
-	public virtual Task DeleteAsync(T entity)
+	public virtual Task DeleteAsync(T entity, string? partitionKey = null)
 		=> _container.DeleteItemAsync<T>(entity.Id.ToString(), new PartitionKey());
 }

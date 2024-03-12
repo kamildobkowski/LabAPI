@@ -11,10 +11,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Dtos\" />
     <Folder Include="Features\Orders\Commands\" />
     <Folder Include="Features\Orders\Queries\" />
-    <Folder Include="MappingProfiles\" />
+    <Folder Include="Features\Tests\Queries\" />
   </ItemGroup>
 
   <ItemGroup>
