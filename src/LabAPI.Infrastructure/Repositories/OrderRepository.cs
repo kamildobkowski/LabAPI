@@ -9,5 +9,18 @@ namespace LabAPI.Infrastructure.Repositories;
 internal sealed class OrderRepository(CosmosClient cosmosClient) 
 	:  GenericRepository<Order>(cosmosClient), IOrderRepository
 {
-	
+	public Task CreateAsync(Order entity)
+	{
+		throw new NotImplementedException();
+	}
+
+	public Task UpdateAsync(Order entity)
+	{
+		throw new NotImplementedException();
+	}
+
+	public Task DeleteAsync(Order entity)
+	{
+		throw new NotImplementedException();
+	}
 }

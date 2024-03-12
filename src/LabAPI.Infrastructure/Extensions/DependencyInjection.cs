@@ -16,5 +16,6 @@ public static class DependencyInjection
 				.Build();
 		services.AddSingleton(cosmosClient);
 		services.AddScoped<IOrderRepository, OrderRepository>();
+		services.AddScoped<ITestRepository, TestRepository>();
 	}
 }
