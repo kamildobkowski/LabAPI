@@ -17,10 +17,17 @@ public class TestController(IMediator mediator) : ControllerBase
 		return Created();
 	}
 
-	[HttpGet("{shortName}")]
-	public async Task<ActionResult<TestDto>> GetTestFromName([FromRoute] string shortName)
+	[HttpGet("{id}")]
+	public async Task<ActionResult<TestDto>> GetTest([FromRoute] string id)
 	{
-		var dto = await mediator.Send(new GetTestFromShortNameQuery(shortName));
+		var dto = await mediator.Send(new GetTestQuery(id));
 		return Ok(dto);
+	}
+
+	[HttpDelete("{id}")]
+	public async Task<ActionResult> DeleteTest([FromRoute] string id)
+	{
+		await mediator.Send(new DeleteTestCommand(id));
+		return NoContent();
 	}
 }

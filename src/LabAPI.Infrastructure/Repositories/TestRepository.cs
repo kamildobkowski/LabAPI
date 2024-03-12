@@ -7,7 +7,7 @@ namespace LabAPI.Infrastructure.Repositories;
 internal sealed class TestRepository(CosmosClient cosmosClient) : GenericRepository<Test>(cosmosClient), ITestRepository
 {
 	public async Task CreateAsync(Test entity)
-		=> await base.CreateAsync(entity, entity.ShortName);
+		=> await base.CreateAsync(entity);
 
 
 	public async Task UpdateAsync(Test entity)
