@@ -1,4 +1,5 @@
 using System.Reflection;
+using LabAPI.Api.Middlewares;
 using LabAPI.Application.Extensions;
 using LabAPI.Infrastructure.Extensions;
 
@@ -10,6 +11,7 @@ builder.Services.AddInfrastructure(builder.Configuration);
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
 
 builder.Services.AddControllers();
+builder.Services.AddTransient<ErrorHandlingMiddleware>();
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -23,6 +25,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+app.UseMiddleware<ErrorHandlingMiddleware>();
 
 app.UseAuthorization();
 
