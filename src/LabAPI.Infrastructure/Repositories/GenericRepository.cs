@@ -38,18 +38,6 @@ internal abstract class GenericRepository<T> (CosmosClient cosmosClient) : IPagi
 
 	public virtual Task DeleteAsync(T entity, string? partitionKey = null)
 		=> _container.DeleteItemAsync<T>(entity.Id, new PartitionKey(partitionKey));
-	/*protected IQueryable<T> GetPageQuery(int page, int pageSize, Expression<Func<T, object>> orderBy, 
-		Expression<Func<T, bool>> filter, bool asc=true)
-		=> asc ? _dbContext.Set<T>()
-				.Where(filter)
-				.OrderBy(orderBy)
-				.Skip((page-1)*pageSize)
-				.Take(pageSize)
-			: _dbContext.Set<T>()
-				.Where(filter)
-				.OrderByDescending(orderBy)
-				.Skip((page-1)*pageSize)
-				.Take(pageSize);*/
 	protected virtual IQueryable<T> PaginationQuery(int page, int pageSize, Expression<Func<T, object>> orderBy,
 		Expression<Func<T, bool>> filter, bool asc = true)
 		=> asc

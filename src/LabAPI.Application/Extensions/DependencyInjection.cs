@@ -1,3 +1,6 @@
+using FluentValidation;
+using FluentValidation.AspNetCore;
+using LabAPI.Application.Dtos.Tests;
 using LabAPI.Application.Features.Tests.Commands;
 using LabAPI.Application.MappingProfiles;
 using Microsoft.Extensions.DependencyInjection;
@@ -10,5 +13,7 @@ public static class DependencyInjection
 	{
 		services.AddAutoMapper(typeof(TestMappingProfile));
 		services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(CreateTestCommand).Assembly));
+		services.AddValidatorsFromAssemblyContaining<CreateTestDtoValidator>()
+			.AddFluentValidationAutoValidation();
 	}
 }
