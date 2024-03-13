@@ -42,9 +42,9 @@ public class TestController(IMediator mediator) : ControllerBase
 	[HttpGet]
 	public async Task<ActionResult<PagedList<TestDto>>> GetAll([FromQuery] int page = 1, [FromQuery] int pageSize = 20,
 		[FromQuery] string? filterBy = null, [FromQuery] string? filter = null, [FromQuery] string? orderBy = null, 
-		[FromQuery] bool sortOrder = true)
+		[FromQuery] bool asc = true)
 	{
-		var pagedList = await mediator.Send(new GetAllTestsQuery(page, pageSize, filterBy, filter, orderBy, sortOrder));
+		var pagedList = await mediator.Send(new GetAllTestsQuery(page, pageSize, filterBy, filter, orderBy, asc));
 		return Ok(pagedList);
 	}
 }
