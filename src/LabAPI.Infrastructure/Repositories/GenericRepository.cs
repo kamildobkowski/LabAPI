@@ -87,7 +87,6 @@ internal abstract class GenericRepository<T> (CosmosClient cosmosClient) : IPagi
 				var convertExpression = Expression.Convert(propertyAccess, typeof(object));
 				orderByLambda = Expression.Lambda<Func<T, object>>(convertExpression, parameter);
 			}
-			
 		}
 
 		Expression<Func<T, bool>> filterLambda;
