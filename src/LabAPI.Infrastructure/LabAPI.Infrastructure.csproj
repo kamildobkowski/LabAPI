@@ -11,6 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="AzureAutoNumber" Version="1.4.0" />
     <PackageReference Include="Microsoft.Azure.Cosmos" Version="3.38.1" />
   </ItemGroup>
 

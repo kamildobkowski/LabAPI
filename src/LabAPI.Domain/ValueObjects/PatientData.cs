@@ -6,24 +6,15 @@ public sealed record PatientData
 {
 	public string? Pesel { get; init; }
 	public DateOnly DateOfBirth { get; init; }
-	public EnSex? Sex { get; init; }
+	public string? Sex { get; init; }
 	public Address? Address { get; init; }
+	
 
-	public PatientData()
+	public PatientData(string? pesel, DateOnly? dateOfBirth, string? sex, Address? address)
 	{
-		
-	}
-	public PatientData(string pesel, EnSex sex, Address? address)
-	{
-		Pesel = pesel;
-		DateOfBirth = GetDateOnlyFromPesel(pesel);
-		Sex = sex;
-		Address = address;
-	}
-
-	public PatientData(DateOnly dateOfBirth, EnSex sex, Address? address)
-	{
-		DateOfBirth = dateOfBirth;
+		if (pesel is not null)
+			Pesel = pesel;
+		DateOfBirth = dateOfBirth ?? GetDateOnlyFromPesel(pesel!);
 		Sex = sex;
 		Address = address;
 	}

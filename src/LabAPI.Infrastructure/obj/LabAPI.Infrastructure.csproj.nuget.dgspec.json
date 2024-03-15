@@ -179,6 +179,10 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "dependencies": {
+            "AzureAutoNumber": {
+              "target": "Package",
+              "version": "[1.4.0, )"
+            },
             "Microsoft.Azure.Cosmos": {
               "target": "Package",
               "version": "[3.38.1, )"

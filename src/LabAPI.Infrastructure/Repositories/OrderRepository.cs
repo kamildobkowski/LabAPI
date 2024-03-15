@@ -1,26 +1,24 @@
-using System.Linq.Expressions;
 using LabAPI.Application.Interfaces;
 using LabAPI.Domain.Entities;
 using Microsoft.Azure.Cosmos;
-using Microsoft.Azure.Cosmos.Linq;
 
 namespace LabAPI.Infrastructure.Repositories;
 
 internal sealed class OrderRepository(CosmosClient cosmosClient) 
 	:  GenericRepository<Order>(cosmosClient), IOrderRepository
 {
-	public Task CreateAsync(Order entity)
+	public async Task CreateAsync(Order entity)
 	{
-		throw new NotImplementedException();
+		await base.CreateAsync(entity);
 	}
 
-	public Task UpdateAsync(Order entity)
+	public async Task UpdateAsync(Order entity)
 	{
-		throw new NotImplementedException();
+		await base.UpdateAsync(entity);
 	}
 
-	public Task DeleteAsync(Order entity)
+	public async Task DeleteAsync(Order entity)
 	{
-		throw new NotImplementedException();
+		await base.DeleteAsync(entity, entity.Id);
 	}
 }

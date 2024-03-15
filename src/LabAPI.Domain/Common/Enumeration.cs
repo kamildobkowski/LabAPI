@@ -20,7 +20,7 @@ public abstract class Enumeration<T> : IEquatable<Enumeration<T>>
 		return Enumerations.GetValueOrDefault(value);
 	}
 
-	public static T? FromName(string name)
+	public static T? FromName(string? name)
 	{
 		return Enumerations.Values
 			.SingleOrDefault(r => r.Name == name);
