@@ -6,7 +6,7 @@ using MediatR;
 
 namespace LabAPI.Application.Features.Tests.Commands;
 
-public sealed record UpdateTestCommand(string Id, CreateTestDto Dto) : IRequest;
+public sealed record UpdateTestCommand(string Id, UpdateTestDto Dto) : IRequest;
 internal sealed class UpdateTestCommandHandler(ITestRepository repository, IMapper mapper)
 	: IRequestHandler<UpdateTestCommand>
 {

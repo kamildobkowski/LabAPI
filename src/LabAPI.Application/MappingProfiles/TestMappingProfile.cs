@@ -16,5 +16,7 @@ public class TestMappingProfile : Profile
 			.ForMember(r => r.Markers, c => c.MapFrom(s => s.Markers));
 		CreateMap<Test, TestDto>()
 			.ForMember(r => r.Markers, c => c.MapFrom(s => s.Markers));
+		CreateMap<UpdateTestDto, Test>()
+			.ForMember(r => r.Markers, c => c.MapFrom(s => s.Markers));
 	}
 }

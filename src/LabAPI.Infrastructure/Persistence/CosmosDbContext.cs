@@ -23,6 +23,8 @@ public sealed class CosmosDbContext(IConfiguration configuration) : DbContext
 			.ToContainer("Tests")
 			.HasNoDiscriminator()
 			.HasKey(r => r.Id);
+		modelBuilder.Entity<Test>()
+			.OwnsMany(r => r.Markers);
 		modelBuilder.Entity<Order>()
 			.HasPartitionKey(r => r.OrderNumber)
 			.ToContainer("Orders")

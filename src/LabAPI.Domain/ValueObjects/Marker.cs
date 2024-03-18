@@ -7,7 +7,7 @@ public sealed class Marker(
 	decimal? lowerNorm = null,
 	decimal? higherNorm = null,
 	string? unit = null,
-	string? shortName = null)
+	string? shortName = null) : BaseEntity
 {
 	public string ShortName { get; set; } = shortName ?? name;
 	public string Name { get; set; } = name;

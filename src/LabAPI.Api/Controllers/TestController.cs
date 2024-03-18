@@ -33,7 +33,7 @@ public class TestController(IMediator mediator) : ControllerBase
 	}
 
 	[HttpPut("{id}")]
-	public async Task<ActionResult> Update([FromRoute] string id, [FromBody] CreateTestDto dto)
+	public async Task<ActionResult> Update([FromRoute] string id, [FromBody] UpdateTestDto dto)
 	{
 		await mediator.Send(new UpdateTestCommand(id, dto));
 		return Ok();
