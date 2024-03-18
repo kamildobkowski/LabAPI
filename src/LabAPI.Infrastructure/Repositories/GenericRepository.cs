@@ -52,7 +52,6 @@ internal abstract class GenericRepository<T> (CosmosDbContext dbContext)
 		}
 		else
 		{
-			orderBy = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(orderBy);
 			var property = typeof(T).GetProperty(orderBy);
 			if (property is null)
 			{
@@ -72,7 +71,6 @@ internal abstract class GenericRepository<T> (CosmosDbContext dbContext)
 			filterLambda = (entity) => true;
 		else
 		{
-			filterBy = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(filterBy);
 			var filterProperty = typeof(T).GetProperty(filterBy);
 			if (filterProperty is null)
 			{

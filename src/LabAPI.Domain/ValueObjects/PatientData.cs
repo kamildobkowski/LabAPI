@@ -1,8 +1,9 @@
-using LabAPI.Domain.Enums;
+using LabAPI.Domain.Common;
+
 
 namespace LabAPI.Domain.ValueObjects;
 
-public sealed record PatientData
+public sealed class PatientData
 {
 	public string? Pesel { get; init; }
 	public DateOnly DateOfBirth { get; init; }
@@ -24,15 +25,15 @@ public sealed record PatientData
 
 	private static DateOnly GetDateOnlyFromPesel(string pesel)
 	{
-		var year = int.Parse(pesel[..1]);
+		var year = int.Parse(pesel[..2]);
 		if (pesel[3] == '2' || pesel[3] == '3')
 			year += 2000;
 		else
 			year += 1900;
-		var month = int.Parse(pesel[2..3]);
+		var month = int.Parse(pesel[2..4]);
 		if (year >= 2000)
 			month -= 20;
-		var day = int.Parse(pesel[4..5]);
+		var day = int.Parse(pesel[4..6]);
 		return new DateOnly(year, month, day);
 	}
 }
