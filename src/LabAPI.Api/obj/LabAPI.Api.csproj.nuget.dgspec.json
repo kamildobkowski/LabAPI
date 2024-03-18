@@ -260,6 +260,14 @@
             "Microsoft.Azure.Cosmos": {
               "target": "Package",
               "version": "[3.38.1, )"
+            },
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[8.0.3, )"
+            },
+            "Microsoft.EntityFrameworkCore.Cosmos": {
+              "target": "Package",
+              "version": "[8.0.3, )"
             }
           },
           "imports": [

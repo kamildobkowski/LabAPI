@@ -12,7 +12,7 @@ public sealed class OrderController(IMediator mediator) : ControllerBase
 	[HttpPost]
 	public async Task<ActionResult> CreateOrder([FromBody] CreateOrderDto dto)
 	{
-		await mediator.Send(new CreateOrderCommand(dto));
-		return Created();
+		var id = await mediator.Send(new CreateOrderCommand(dto));
+		return Created($"api/order/{id}", null);
 	}
 }

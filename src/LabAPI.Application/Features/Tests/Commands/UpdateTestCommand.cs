@@ -13,6 +13,7 @@ internal sealed class UpdateTestCommandHandler(ITestRepository repository, IMapp
 	public async Task Handle(UpdateTestCommand request, CancellationToken cancellationToken)
 	{
 		var entity = mapper.Map<Test>(request.Dto);
-		await repository.UpdateAsync(entity);
+		repository.Update(entity);
+		await repository.SaveChangesAsync();
 	}
 }

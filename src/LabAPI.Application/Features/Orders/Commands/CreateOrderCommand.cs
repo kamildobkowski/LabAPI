@@ -6,14 +6,16 @@ using MediatR;
 
 namespace LabAPI.Application.Features.Orders.Commands;
 
-public sealed record CreateOrderCommand(CreateOrderDto Dto) : IRequest;
+public sealed record CreateOrderCommand(CreateOrderDto Dto) : IRequest<string>;
 
 internal sealed class CreateOrderCommandHandler(IOrderRepository repository, IMapper mapper) 
-	: IRequestHandler<CreateOrderCommand>
+	: IRequestHandler<CreateOrderCommand, string>
 {
-	public async Task Handle(CreateOrderCommand request, CancellationToken cancellationToken)
+	public async Task<string> Handle(CreateOrderCommand request, CancellationToken cancellationToken)
 	{
 		var entity = mapper.Map<Order>(request.Dto);
-		await repository.CreateAsync(entity);
+		var id = await repository.CreateWithNewIdAsync(entity);
+		await repository.SaveChangesAsync();
+		return id;
 	}
 } 

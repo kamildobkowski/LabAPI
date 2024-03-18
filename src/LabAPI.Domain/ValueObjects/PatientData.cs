@@ -8,8 +8,11 @@ public sealed record PatientData
 	public DateOnly DateOfBirth { get; init; }
 	public string? Sex { get; init; }
 	public Address? Address { get; init; }
-	
 
+	public PatientData()
+	{
+		
+	}
 	public PatientData(string? pesel, DateOnly? dateOfBirth, string? sex, Address? address)
 	{
 		if (pesel is not null)

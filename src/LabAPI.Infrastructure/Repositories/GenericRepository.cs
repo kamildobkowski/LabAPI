@@ -2,51 +2,41 @@ using System.Globalization;
 using System.Linq.Expressions;
 using LabAPI.Application.Interfaces;
 using LabAPI.Domain.Common;
+using LabAPI.Infrastructure.Persistence;
 using Microsoft.Azure.Cosmos;
 using Microsoft.Azure.Cosmos.Linq;
+using Microsoft.EntityFrameworkCore;
 
 namespace LabAPI.Infrastructure.Repositories;
 
-internal abstract class GenericRepository<T> (CosmosClient cosmosClient) : IPagination<T> where T : BaseEntity
+internal abstract class GenericRepository<T> (CosmosDbContext dbContext) 
+	: IPagination<T> where T : BaseEntity
 {
-	private readonly Container _container = cosmosClient.GetContainer("LabApi", typeof(T).Name + "s");
+
 	public virtual async Task<T?> GetAsync(Expression<Func<T, bool>> lambda)
-	{
-		using var q = _container.GetItemLinqQueryable<T>().Where(lambda).ToFeedIterator();
-		return (await q.ReadNextAsync()).Resource.FirstOrDefault();
-	}
+		=> await dbContext.Set<T>().Where(lambda).FirstOrDefaultAsync();
 
 	public virtual async Task<List<T>> GetAllAsync(Expression<Func<T, bool>> lambda = default!)
-	{
-		using var q = _container.GetItemLinqQueryable<T>().Where(lambda).ToFeedIterator();
-		{
-			var list = new List<T>();
-			while (q.HasMoreResults)
-			{
-				list.AddRange(await q.ReadNextAsync());
-			}
-			return list;
-		}
-	}
+		=> await dbContext.Set<T>().Where(lambda).ToListAsync();
 
-	public virtual async Task CreateAsync(T entity, string? partitionKey = null)
-		=> await _container.CreateItemAsync(entity);
+	public virtual async void Create(T entity)
+		=> await dbContext.Set<T>().AddAsync(entity);
 
+	public virtual async void Update(T entity)
+		=> dbContext.Set<T>().Update(entity);
 
-	public virtual async Task UpdateAsync(T entity, string? partitionKey = null)
-		=> await _container.UpsertItemAsync(entity);
-
-	public virtual Task DeleteAsync(T entity, string? partitionKey = null)
-		=> _container.DeleteItemAsync<T>(entity.Id, new PartitionKey(partitionKey));
+	public virtual async void Delete(T entity)
+		=> dbContext.Set<T>().Remove(entity);
+	
 	protected virtual IQueryable<T> PaginationQuery(int page, int pageSize, Expression<Func<T, object>> orderBy,
 		Expression<Func<T, bool>> filter, bool asc = true)
 		=> asc
-			? _container.GetItemLinqQueryable<T>()
+			? dbContext.Set<T>()
 				.Where(filter)
 				.OrderBy(orderBy)
 				.Skip((page - 1) * pageSize)
 				.Take(pageSize)
-			: _container.GetItemLinqQueryable<T>()
+			: dbContext.Set<T>()
 				.Where(filter)
 				.OrderByDescending(orderBy)
 				.Skip((page - 1) * pageSize)
@@ -106,15 +96,10 @@ internal abstract class GenericRepository<T> (CosmosClient cosmosClient) : IPagi
 	}
 	public async Task<PagedList<T>> GetPageAsync(int page, int pageSize, string? filterBy, string? filter, string? orderBy ,bool sortOrder = true)
 	{
-		using var q = PaginationQuery(page, pageSize, filterBy, filter, orderBy, sortOrder)
-			.ToFeedIterator();
-		{
-			var list = new List<T>();
-			while (q.HasMoreResults)
-			{
-				list.AddRange(await q.ReadNextAsync());
-			}
-			return new PagedList<T>(list, page, pageSize, list.Count);
-		}
+		var list = await PaginationQuery(page, pageSize, filterBy, filter, orderBy, sortOrder).ToListAsync();
+		return new PagedList<T>(list, page, pageSize, list.Count);
 	}
+
+	public virtual async Task SaveChangesAsync()
+		=> await dbContext.SaveChangesAsync();
 }
