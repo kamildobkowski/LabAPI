@@ -67,7 +67,6 @@ public sealed class CreateOrderResultDtoValidator : AbstractValidator<CreateOrde
 					c.AddFailure("Invalid Tests");
 					return;
 				}
-					
 			});
 	}
 }
