@@ -1,5 +1,5 @@
-using LabAPI.Application.Dtos.Orders;
 using LabAPI.Application.Features.Orders.Commands;
+using LabAPI.Application.Features.Orders.Dtos;
 using LabAPI.Application.Features.Orders.Queries;
 using LabAPI.Domain.Common;
 using MediatR;

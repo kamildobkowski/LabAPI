@@ -1,4 +1,4 @@
-using LabAPI.Application.Interfaces;
+using LabAPI.Application.Features.Tests.Repository;
 using LabAPI.Domain.Entities;
 using LabAPI.Infrastructure.Persistence;
 using Microsoft.Azure.Cosmos;

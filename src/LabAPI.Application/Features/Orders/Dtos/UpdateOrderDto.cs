@@ -1,8 +1,8 @@
 using FluentValidation;
-using LabAPI.Application.Interfaces;
-using LabAPI.Domain.ValueObjects;
+using LabAPI.Application.Features.Orders.Repository;
+using LabAPI.Application.Features.Tests.Repository;
 
-namespace LabAPI.Application.Dtos.Orders;
+namespace LabAPI.Application.Features.Orders.Dtos;
 
 public sealed record UpdateOrderDto
 {

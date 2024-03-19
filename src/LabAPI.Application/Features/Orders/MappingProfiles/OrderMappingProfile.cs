@@ -1,10 +1,9 @@
 using AutoMapper;
-using LabAPI.Application.Dtos.Orders;
+using LabAPI.Application.Features.Orders.Dtos;
 using LabAPI.Domain.Entities;
-using LabAPI.Domain.Enums;
 using LabAPI.Domain.ValueObjects;
 
-namespace LabAPI.Application.MappingProfiles;
+namespace LabAPI.Application.Features.Orders.MappingProfiles;
 
 public sealed class OrderMappingProfile : Profile
 {

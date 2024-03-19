@@ -1,4 +1,4 @@
-using LabAPI.Application.Interfaces;
+using LabAPI.Application.Features.Tests.Repository;
 using LabAPI.Domain.Exceptions;
 using MediatR;
 
@@ -14,7 +14,7 @@ internal sealed class DeleteTestCommandHandler(ITestRepository repository)
 		var entity = await repository.GetAsync(r => r.Id == request.Id);
 		if (entity is null)
 			throw new NotFoundException();
-		repository.Delete(entity);
+		await repository.Delete(entity);
 		await repository.SaveChangesAsync();
 	}
 } 

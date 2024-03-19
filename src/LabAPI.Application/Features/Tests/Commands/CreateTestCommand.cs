@@ -1,6 +1,6 @@
 using AutoMapper;
 using LabAPI.Application.Dtos.Tests;
-using LabAPI.Application.Interfaces;
+using LabAPI.Application.Features.Tests.Repository;
 using LabAPI.Domain.Entities;
 using MediatR;
 
@@ -14,7 +14,7 @@ internal sealed class CreateTestCommandHandler(ITestRepository repository, IMapp
 	public async Task Handle(CreateTestCommand request, CancellationToken cancellationToken)
 	{
 		var entity = mapper.Map<Test>(request.Dto);
-		repository.Create(entity);
+		await repository.Create(entity);
 		await repository.SaveChangesAsync();
 	}
 } 

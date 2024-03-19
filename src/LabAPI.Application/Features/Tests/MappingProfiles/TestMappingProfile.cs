@@ -1,10 +1,10 @@
 using AutoMapper;
-using LabAPI.Application.Dtos.Markers;
 using LabAPI.Application.Dtos.Tests;
+using LabAPI.Application.Features.Orders.Dtos;
 using LabAPI.Domain.Entities;
 using LabAPI.Domain.ValueObjects;
 
-namespace LabAPI.Application.MappingProfiles;
+namespace LabAPI.Application.Features.Tests.MappingProfiles;
 
 public class TestMappingProfile : Profile
 {

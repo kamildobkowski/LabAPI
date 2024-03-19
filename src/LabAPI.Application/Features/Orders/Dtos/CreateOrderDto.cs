@@ -1,7 +1,7 @@
 using FluentValidation;
-using LabAPI.Application.Interfaces;
+using LabAPI.Application.Features.Tests.Repository;
 
-namespace LabAPI.Application.Dtos.Orders;
+namespace LabAPI.Application.Features.Orders.Dtos;
 
 public sealed record CreateOrderDto
 {

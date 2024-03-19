@@ -1,6 +1,6 @@
 using System.Reflection;
 using LabAPI.Api.Middlewares;
-using LabAPI.Application.Extensions;
+using LabAPI.Application.Common.Extensions;
 using LabAPI.Infrastructure.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);

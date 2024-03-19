@@ -1,6 +1,6 @@
 using System.Globalization;
 using System.Linq.Expressions;
-using LabAPI.Application.Interfaces;
+using LabAPI.Application.Common.Interfaces;
 using LabAPI.Domain.Common;
 using LabAPI.Infrastructure.Persistence;
 using Microsoft.Azure.Cosmos;

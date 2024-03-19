@@ -1,6 +1,6 @@
 using LabAPI.Domain.ValueObjects;
 
-namespace LabAPI.Application.Dtos.Orders;
+namespace LabAPI.Application.Features.Orders.Dtos;
 
 public sealed record OrderDto
 {

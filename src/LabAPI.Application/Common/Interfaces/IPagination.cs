@@ -1,6 +1,6 @@
 using LabAPI.Domain.Common;
 
-namespace LabAPI.Application.Interfaces;
+namespace LabAPI.Application.Common.Interfaces;
 
 public interface IPagination<T> where T : class
 {

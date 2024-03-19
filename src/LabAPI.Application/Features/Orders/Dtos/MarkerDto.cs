@@ -1,4 +1,4 @@
-namespace LabAPI.Application.Dtos.Markers;
+namespace LabAPI.Application.Features.Orders.Dtos;
 
 public sealed record MarkerDto(
 	string Name,

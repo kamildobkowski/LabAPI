@@ -2,10 +2,10 @@ using FluentValidation;
 using FluentValidation.AspNetCore;
 using LabAPI.Application.Dtos.Tests;
 using LabAPI.Application.Features.Tests.Commands;
-using LabAPI.Application.MappingProfiles;
+using LabAPI.Application.Features.Tests.MappingProfiles;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace LabAPI.Application.Extensions;
+namespace LabAPI.Application.Common.Extensions;
 
 public static class DependencyInjection
 {

@@ -1,6 +1,6 @@
 using FluentValidation;
-using LabAPI.Application.Dtos.Markers;
-using LabAPI.Application.Interfaces;
+using LabAPI.Application.Features.Orders.Dtos;
+using LabAPI.Application.Features.Tests.Repository;
 using LabAPI.Domain.Extensions;
 
 namespace LabAPI.Application.Dtos.Tests;
