@@ -18,7 +18,7 @@ public sealed class CreateOrderResultDtoValidator : AbstractValidator<CreateOrde
 			.NotEmpty()
 			.Length(10);
 		RuleFor(r => r.Results)
-			.NotEmpty()
+			.NotNull()
 			.Custom((dic, c) =>
 			{
 				foreach (var i in dic)
