@@ -13,12 +13,17 @@ public sealed class OrderMappingProfile : Profile
 			.ForMember(r => r.PatientData,
 				c => c.MapFrom(s =>
 					new PatientData(s.Pesel, s.DateOfBirth, s.Sex!,
-						new Address(s.AddressNumber, s.AddressStreet, s.AddressCity, s.AddressPostalCode))));
+						new Address(s.AddressNumber, s.AddressStreet, s.AddressCity, s.AddressPostalCode))))
+			.ForMember(r => r.Results, c =>
+				c.MapFrom(s =>
+					s.Tests.ToDictionary<string?, string, Dictionary<string, string>?>(i => i, i => null)));
+		
 		CreateMap<Order, OrderDto>()
 			.ForMember(r => r.Sex, c => c.MapFrom(s => s.PatientData.Sex))
 			.ForMember(r => r.DateOfBirth, c => c.MapFrom(s => s.PatientData.DateOfBirth))
 			.ForMember(r => r.Pesel, c => c.MapFrom(s => s.PatientData.Pesel))
 			.ForMember(r => r.Address, c => c.MapFrom(s => s.PatientData.Address));
+		
 		CreateMap<UpdateOrderDto, Order>()
 			.ForMember(r => r.PatientData,
 				c => c.MapFrom(s =>

@@ -1,5 +1,4 @@
 using FluentValidation;
-using LabAPI.Application.Features.OrderResults.Repository;
 using LabAPI.Application.Features.Orders.Repository;
 using LabAPI.Application.Features.Tests.Repository;
 
@@ -13,8 +12,7 @@ public sealed record CreateOrderResultDto
 
 public sealed class CreateOrderResultDtoValidator : AbstractValidator<CreateOrderResultDto>
 {
-	public CreateOrderResultDtoValidator(IOrderRepository orderRepository, 
-		IOrderResultRepository repository, ITestRepository testRepository)
+	public CreateOrderResultDtoValidator(IOrderRepository orderRepository, ITestRepository testRepository)
 	{
 		RuleFor(r => r.OrderNumber)
 			.NotEmpty()

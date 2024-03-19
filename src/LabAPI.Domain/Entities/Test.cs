@@ -6,7 +6,6 @@ namespace LabAPI.Domain.Entities;
 
 public sealed class Test : BaseEntity
 {
-	public override string Id { get; set; }
 	public string ShortName { get; set; }
 	public string Name { get; set; }
 	public List<Marker> Markers { get; set; } = [];

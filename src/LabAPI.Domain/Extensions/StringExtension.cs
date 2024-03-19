@@ -5,6 +5,7 @@ public static class StringExtension
 	public static string EncodePolishLetterAndWhiteChars(this string str)
 	{
 		var s = str
+			.ToLower()
 			.Replace('ł', 'l')
 			.Replace('ą', 'a')
 			.Replace('ę', 'e')

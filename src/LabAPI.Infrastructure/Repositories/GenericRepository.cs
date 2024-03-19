@@ -38,7 +38,10 @@ internal abstract class GenericRepository<T> (CosmosClient cosmosClient, CosmosD
 
 
 	public virtual async Task UpdateAsync(T entity)
-		=> await _container.UpsertItemAsync(entity);
+	{
+		entity.ModifiedAt=DateTime.UtcNow;
+		await _container.UpsertItemAsync(entity);
+	}
 
 	public virtual Task DeleteAsync(T entity, string? partitionKey = null)
 		=> _container.DeleteItemAsync<T>(entity.Id.ToString(), new PartitionKey(partitionKey));

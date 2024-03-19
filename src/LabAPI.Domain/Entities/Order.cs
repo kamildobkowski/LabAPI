@@ -7,5 +7,5 @@ public sealed class Order : BaseEntity
 {
 	public string OrderNumber { get; set; } = string.Empty;
 	public PatientData PatientData { get; set; } = null!;
-	public List<string> Tests { get; set; } = [];
+	public Dictionary<string, Dictionary<string, string>?> Results { get; set; } = null!;
 }

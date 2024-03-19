@@ -25,6 +25,7 @@ internal sealed class OrderRepository(CosmosDbContext dbContext, CosmosClient co
 		if (latestOrder is not null)
 			s = (int.Parse(latestOrder.OrderNumber)+1).ToString();
 		entity.OrderNumber = s;
+		entity.Id = s;
 		await Create(entity);
 		return s;
 	}
