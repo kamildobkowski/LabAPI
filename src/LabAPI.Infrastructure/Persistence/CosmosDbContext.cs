@@ -1,5 +1,6 @@
 using System.Data;
 using LabAPI.Domain.Entities;
+using LabAPI.Domain.ValueObjects;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 
@@ -30,5 +31,7 @@ public sealed class CosmosDbContext(IConfiguration configuration) : DbContext
 			.ToContainer("Orders")
 			.HasNoDiscriminator()
 			.HasKey(r => r.OrderNumber);
+		modelBuilder.Entity<Order>()
+			.OwnsOne(r => r.PatientData).OwnsOne(r => r.Address);
 	}
 }

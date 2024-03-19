@@ -26,7 +26,7 @@ public sealed class PatientData
 	private static DateOnly GetDateOnlyFromPesel(string pesel)
 	{
 		var year = int.Parse(pesel[..2]);
-		if (pesel[3] == '2' || pesel[3] == '3')
+		if (pesel[2] == '2' || pesel[2] == '3')
 			year += 2000;
 		else
 			year += 1900;
