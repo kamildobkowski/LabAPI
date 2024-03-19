@@ -9,5 +9,5 @@ public sealed record OrderDto
 	public DateOnly DateOfBirth { get; init; }
 	public string? Sex { get; init; }
 	public Address? Address { get; init; }
-	public List<string> Tests { get; init; } = [];
+	public Dictionary<string, Dictionary<string, string>?> Results { get; init; } = null!;
 }

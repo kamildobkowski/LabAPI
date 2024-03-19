@@ -49,4 +49,13 @@ public sealed class OrderController(IMediator mediator) : ControllerBase
 		await mediator.Send(new UpdateOrderCommand(orderNumber, dto));
 		return Ok();
 	}
+
+	[HttpPatch("{orderNumber}")]
+	public async Task<ActionResult> AddResults([FromRoute] string orderNumber, [FromBody] CreateOrderResultDto dto)
+	{
+		if (orderNumber != dto.OrderNumber)
+			throw new BadHttpRequestException("Order Numbers do not match");
+		await mediator.Send(new AddOrderResultsCommand(dto));
+		return Ok();
+	}
 }
