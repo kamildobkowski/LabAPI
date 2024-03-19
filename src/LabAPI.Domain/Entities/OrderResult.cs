@@ -4,6 +4,6 @@ namespace LabAPI.Domain.Entities;
 
 public sealed class OrderResult : BaseEntity
 {
-	public string OrderId { get; set; } = null!;
-	public Dictionary<string, Dictionary<string, string>> Results { get; set; } = new();
+	public string OrderNumber { get; set; } = null!;
+	public Dictionary<string, Dictionary<string, string>> Results { get; set; } = null!;
 }

@@ -1,6 +1,7 @@
 using System.Configuration;
 using AutoNumber;
 using Azure.Storage.Blobs;
+using LabAPI.Application.Features.OrderResults.Repository;
 using LabAPI.Application.Features.Orders.Repository;
 using LabAPI.Application.Features.Tests.Repository;
 using LabAPI.Infrastructure.Persistence;
@@ -22,6 +23,7 @@ public static class DependencyInjection
 		services.AddSingleton(cosmosClient);
 		services.AddScoped<IOrderRepository, OrderRepository>();
 		services.AddScoped<ITestRepository, TestRepository>();
+		services.AddScoped<IOrderResultRepository, OrderResultRepository>();
 		services.AddDbContext<CosmosDbContext>();
 	}
 }
