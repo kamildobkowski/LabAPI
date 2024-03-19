@@ -9,5 +9,6 @@ public sealed class OrderResultMappingProfile : Profile
 	public OrderResultMappingProfile()
 	{
 		CreateMap<CreateOrderResultDto, OrderResult>();
+		CreateMap<OrderResult, OrderResultDto>();
 	}
 }
