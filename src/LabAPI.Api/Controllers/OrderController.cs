@@ -28,4 +28,18 @@ public sealed class OrderController(IMediator mediator) : ControllerBase
 			new GetAllOrderQuery(page, pageSize, filterBy, filter, orderBy, asc));
 		return Ok(list);
 	}
+	
+	[HttpGet("{orderNumber}")]
+	public async Task<ActionResult<OrderDto>> GetByOrderNumber([FromRoute] string orderNumber)
+	{
+		var dto = await mediator.Send(new GetOrderQuery(orderNumber));
+		return Ok(dto);
+	}
+
+	[HttpDelete("{orderNumber}")]
+	public async Task<ActionResult> DeleteByOrderNumber([FromRoute] string orderNumber)
+	{
+		await mediator.Send(new DeleteOrderCommand(orderNumber));
+		return NoContent();
+	}
 }
