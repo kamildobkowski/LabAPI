@@ -42,4 +42,11 @@ public sealed class OrderController(IMediator mediator) : ControllerBase
 		await mediator.Send(new DeleteOrderCommand(orderNumber));
 		return NoContent();
 	}
+
+	[HttpPut("{orderNumber}")]
+	public async Task<ActionResult> Update([FromRoute] string orderNumber, [FromBody] UpdateOrderDto dto)
+	{
+		await mediator.Send(new UpdateOrderCommand(orderNumber, dto));
+		return Ok();
+	}
 }

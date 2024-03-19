@@ -20,5 +20,10 @@ public sealed class OrderMappingProfile : Profile
 			.ForMember(r => r.DateOfBirth, c => c.MapFrom(s => s.PatientData.DateOfBirth))
 			.ForMember(r => r.Pesel, c => c.MapFrom(s => s.PatientData.Pesel))
 			.ForMember(r => r.Address, c => c.MapFrom(s => s.PatientData.Address));
+		CreateMap<UpdateOrderDto, Order>()
+			.ForMember(r => r.PatientData,
+				c => c.MapFrom(s =>
+					new PatientData(s.Pesel, s.DateOfBirth, s.Sex!,
+						new Address(s.AddressNumber, s.AddressStreet, s.AddressCity, s.AddressPostalCode))));
 	}
 }
