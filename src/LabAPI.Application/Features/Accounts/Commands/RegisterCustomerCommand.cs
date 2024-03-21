@@ -10,7 +10,7 @@ namespace LabAPI.Application.Features.Accounts.Commands;
 public sealed record RegisterCustomerCommand(RegisterCustomerDto Dto) : IRequest;
 
 internal sealed class RegisterCustomerCommandHandler(ICustomerRepository customerRepository, 
-	IPasswordHasher<Customer> passwordHasher, IMapper mapper)
+	IPasswordHasher<User> passwordHasher, IMapper mapper)
 	: IRequestHandler<RegisterCustomerCommand>
 {
 	public async Task Handle(RegisterCustomerCommand request, CancellationToken cancellationToken)

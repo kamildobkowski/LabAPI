@@ -19,17 +19,25 @@ public static class DependencyInjection
 {
 	public static void AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
 	{
+		services.AddRepositories(configuration);
+		services.AddJwtAuthentication(configuration);
+	}
+
+	private static void AddRepositories(this IServiceCollection services, IConfiguration configuration)
+	{
 		var cosmosClient =
 			new CosmosClientBuilder(configuration.GetConnectionString("AzureCosmosDb"))
 				.Build();
 		services.AddSingleton(cosmosClient);
 		services.AddScoped<IOrderRepository, OrderRepository>();
 		services.AddScoped<ITestRepository, TestRepository>();
-		services.AddDbContext<CosmosDbContext>();
 		services.AddScoped<ICustomerRepository, CustomerRepository>();
 		services.AddScoped<IWorkerRepository, WorkerRepository>();
-		services.AddScoped<IPasswordHasher<Customer>, PasswordHasher<Customer>>();
-		services.AddScoped<IPasswordHasher<Worker>, PasswordHasher<Worker>>();
+		services.AddScoped<IPasswordHasher<User>, PasswordHasher<User>>();
+	}
+
+	private static void AddJwtAuthentication(this IServiceCollection services, IConfiguration configuration)
+	{
 		services.AddScoped<IJwtService, JwtService>();
 		var authenticationSettings = new AuthenticationSettings();
 		configuration.GetSection("Authentication").Bind(authenticationSettings);

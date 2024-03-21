@@ -11,7 +11,7 @@ namespace LabAPI.Application.Features.Accounts.Queries;
 public sealed record LoginCustomerQuery(LoginDto Dto) : IRequest<string>;
 
 internal sealed class LoginCustomerQueryHandler(ICustomerRepository customerRepository, 
-	IPasswordHasher<Customer> passwordHasher, IJwtService jwtService) 
+	IPasswordHasher<User> passwordHasher, IJwtService jwtService) 
 	: IRequestHandler<LoginCustomerQuery, string>
 {
 	public async Task<string> Handle(LoginCustomerQuery request, CancellationToken cancellationToken)

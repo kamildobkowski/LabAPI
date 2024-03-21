@@ -9,7 +9,7 @@ namespace LabAPI.Application.Features.Accounts.Commands;
 
 public sealed record RegisterWorkerCommand(RegisterWorkerDto Dto) : IRequest<WorkerWithPasswordDto>;
 
-internal sealed class RegisterWorkerCommandHandler(IWorkerRepository repository, IMapper mapper, IPasswordHasher<Worker> passwordHasher)
+internal sealed class RegisterWorkerCommandHandler(IWorkerRepository repository, IMapper mapper, IPasswordHasher<User> passwordHasher)
 	: IRequestHandler<RegisterWorkerCommand, WorkerWithPasswordDto>
 {
 	public async Task<WorkerWithPasswordDto> Handle(RegisterWorkerCommand request, CancellationToken cancellationToken)
