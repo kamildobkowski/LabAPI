@@ -27,7 +27,14 @@ public sealed class AccountController(IMediator mediator) : ControllerBase
 	[HttpPost("register/worker")]
 	public async Task<ActionResult> RegisterWorker([FromBody] RegisterWorkerDto dto)
 	{
-		await mediator.Send(new RegisterWorkerCommand(dto));
-		return Ok();
+		var response = await mediator.Send(new RegisterWorkerCommand(dto));
+		return Ok(response);
+	}
+
+	[HttpPost("login/worker")]
+	public async Task<ActionResult<string>> LoginWorker([FromBody] LoginDto dto)
+	{
+		var token = await mediator.Send(new LoginWorkerQuery(dto));
+		return Ok(token);
 	}
 }
