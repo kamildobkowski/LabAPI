@@ -27,7 +27,9 @@ public static class DependencyInjection
 		services.AddScoped<ITestRepository, TestRepository>();
 		services.AddDbContext<CosmosDbContext>();
 		services.AddScoped<ICustomerRepository, CustomerRepository>();
+		services.AddScoped<IWorkerRepository, WorkerRepository>();
 		services.AddScoped<IPasswordHasher<Customer>, PasswordHasher<Customer>>();
+		services.AddScoped<IPasswordHasher<Worker>, PasswordHasher<Worker>>();
 		services.AddScoped<IJwtService, JwtService>();
 		var authenticationSettings = new AuthenticationSettings();
 		configuration.GetSection("Authentication").Bind(authenticationSettings);
