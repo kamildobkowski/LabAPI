@@ -9,12 +9,12 @@ using Microsoft.EntityFrameworkCore;
 
 namespace LabAPI.Infrastructure.Repositories;
 
-internal abstract class GenericRepository<T> (CosmosClient cosmosClient, CosmosDbContext dbContext) 
+public abstract class GenericRepository<T> (CosmosClient cosmosClient, CosmosDbContext dbContext) 
 	: IPagination<T> where T : BaseEntity
 {
 
 	private readonly Container _container = cosmosClient.GetContainer("LabApi", typeof(T).Name + "s");
-	public virtual async Task<T?> GetAsync(Expression<Func<T, bool>> lambda)
+	public virtual async Task<T?> GetAsync(Expression<Func<T, bool>> lambda) 
 	{
 		using var q = _container.GetItemLinqQueryable<T>().Where(lambda).ToFeedIterator();
 		return (await q.ReadNextAsync()).Resource.FirstOrDefault();
@@ -33,7 +33,7 @@ internal abstract class GenericRepository<T> (CosmosClient cosmosClient, CosmosD
 		}
 	}
 
-	public virtual async Task CreateAsync(T entity)
+	public virtual async Task CreateAsync(T entity, string? partitionKey=null)
 		=> await _container.CreateItemAsync(entity);
 
 

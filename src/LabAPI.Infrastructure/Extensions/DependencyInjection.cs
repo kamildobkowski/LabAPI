@@ -1,9 +1,12 @@
 using System.Text;
+using LabAPI.Application.Features.Accounts.Repository;
 using LabAPI.Application.Features.Orders.Repository;
 using LabAPI.Application.Features.Tests.Repository;
+using LabAPI.Domain.Entities;
 using LabAPI.Infrastructure.Authentication;
 using LabAPI.Infrastructure.Persistence;
 using LabAPI.Infrastructure.Repositories;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.Azure.Cosmos.Fluent;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -22,6 +25,8 @@ public static class DependencyInjection
 		services.AddScoped<IOrderRepository, OrderRepository>();
 		services.AddScoped<ITestRepository, TestRepository>();
 		services.AddDbContext<CosmosDbContext>();
+		services.AddScoped<ICustomerRepository, CustomerRepository>();
+		services.AddScoped<IPasswordHasher<Customer>, PasswordHasher<Customer>>();
 		var authenticationSettings = new AuthenticationSettings();
 		configuration.GetSection("Authentication").Bind(authenticationSettings);
 
