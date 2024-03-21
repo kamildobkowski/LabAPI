@@ -30,10 +30,6 @@ public sealed class JwtService(AuthenticationSettings authenticationSettings) : 
 			new(Claims.Role, $"{worker.Role}"),
 			new(Claims.Email, $"{worker.Email}")
 		};
-		if (worker.Role == UserRole.CollectionPointWorker)
-		{
-			claims.Add(new Claim(Claims.CollectionPointId, worker.CollectionPointId!));
-		}
 		return GenerateToken(claims);
 	}
 

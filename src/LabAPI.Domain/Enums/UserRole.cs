@@ -5,6 +5,5 @@ public enum UserRole
 	Customer,
 	LabManager,
 	LabWorker,
-	CollectionPointWorker,
 	Admin
 }
