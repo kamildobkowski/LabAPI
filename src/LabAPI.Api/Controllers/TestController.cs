@@ -2,13 +2,16 @@ using LabAPI.Application.Dtos.Tests;
 using LabAPI.Application.Features.Tests.Commands;
 using LabAPI.Application.Features.Tests.Queries;
 using LabAPI.Domain.Common;
+using LabAPI.Domain.Enums;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LabAPI.Api.Controllers;
 
 [ApiController]
 [Route("api/tests")]
+[Authorize(Policy = "IsLabWorker")]
 public class TestController(IMediator mediator) : ControllerBase
 {
 	[HttpPost]

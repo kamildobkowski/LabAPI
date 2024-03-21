@@ -5,8 +5,10 @@ using LabAPI.Application.Features.Orders.Repository;
 using LabAPI.Application.Features.Tests.Repository;
 using LabAPI.Domain.Entities;
 using LabAPI.Infrastructure.Authentication;
+using LabAPI.Infrastructure.Authorization.Policies;
 using LabAPI.Infrastructure.Persistence;
 using LabAPI.Infrastructure.Repositories;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Azure.Cosmos.Fluent;
 using Microsoft.Extensions.Configuration;
@@ -21,6 +23,7 @@ public static class DependencyInjection
 	{
 		services.AddRepositories(configuration);
 		services.AddJwtAuthentication(configuration);
+		services.AddCustomAuthorization(configuration);
 	}
 
 	private static void AddRepositories(this IServiceCollection services, IConfiguration configuration)
@@ -59,5 +62,12 @@ public static class DependencyInjection
 			};
 		});
 		services.AddSingleton(authenticationSettings);
+	}
+
+	private static void AddCustomAuthorization(this IServiceCollection services, IConfiguration configuration)
+	{
+		services.AddScoped<IAuthorizationHandler, IsLabWorkerRequirementHandler>();
+		services.AddAuthorizationBuilder()
+            .AddPolicy("IsLabWorker", b => b.AddRequirements(new IsLabWorkerRequirement()));
 	}
 }

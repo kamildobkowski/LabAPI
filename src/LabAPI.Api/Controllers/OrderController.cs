@@ -3,12 +3,14 @@ using LabAPI.Application.Features.Orders.Dtos;
 using LabAPI.Application.Features.Orders.Queries;
 using LabAPI.Domain.Common;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LabAPI.Api.Controllers;
 
 [ApiController]
 [Route("api/order")]
+[Authorize(Policy = "IsLabWorker")]
 public sealed class OrderController(IMediator mediator) : ControllerBase
 {
 	[HttpPost]
