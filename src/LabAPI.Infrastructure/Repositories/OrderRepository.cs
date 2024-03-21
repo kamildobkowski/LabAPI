@@ -7,10 +7,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace LabAPI.Infrastructure.Repositories;
 
-internal sealed class OrderRepository(CosmosDbContext dbContext, CosmosClient cosmosClient) 
-	:  GenericRepository<Order>(cosmosClient, dbContext), IOrderRepository
+internal sealed class OrderRepository(CosmosClient cosmosClient) 
+	:  GenericRepository<Order>(cosmosClient), IOrderRepository
 {
-	private readonly CosmosDbContext _dbContext = dbContext;
 	private readonly Container _container = cosmosClient.GetContainer("LabApi", nameof(Order) + "s");
 
 	public async Task<string> CreateWithNewIdAsync(Order entity)
@@ -26,21 +25,21 @@ internal sealed class OrderRepository(CosmosDbContext dbContext, CosmosClient co
 			s = (int.Parse(latestOrder.OrderNumber)+1).ToString();
 		entity.OrderNumber = s;
 		entity.Id = s;
-		await Create(entity);
+		await CreateAsync(entity);
 		return s;
 	}
 
-	public async Task Create(Order entity)
+	public async Task CreateAsync(Order entity)
 	{
-		await base.CreateAsync(entity);
+		await base.CreateAsync(entity, entity.OrderNumber);
 	}
 
-	public async Task Update(Order entity)
+	public async Task UpdateAsync(Order entity)
 	{
-		await base.UpdateAsync(entity);
+		await base.UpdateAsync(entity, entity.OrderNumber);
 	}
 
-	public async Task Delete(Order entity)
+	public async Task DeleteAsync(Order entity)
 	{
 		await base.DeleteAsync(entity, entity.OrderNumber);
 	}

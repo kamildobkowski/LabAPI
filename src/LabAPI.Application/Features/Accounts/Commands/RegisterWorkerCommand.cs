@@ -19,7 +19,7 @@ internal sealed class RegisterWorkerCommandHandler(IWorkerRepository repository,
 		entity.PasswordHash = passwordHasher.HashPassword(entity, generatedPassword);
 		var dto = new WorkerWithPasswordDto(
 			entity.Email, generatedPassword, entity.Role.ToString(), entity.Name, entity.Surname);
-		await repository.Create(entity);
+		await repository.CreateAsync(entity);
 		return dto;
 	}
 }

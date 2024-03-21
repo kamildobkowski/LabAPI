@@ -1,25 +1,24 @@
 using LabAPI.Application.Features.Tests.Repository;
 using LabAPI.Domain.Entities;
-using LabAPI.Infrastructure.Persistence;
 using Microsoft.Azure.Cosmos;
 
 namespace LabAPI.Infrastructure.Repositories;
 
-internal sealed class TestRepository(CosmosClient cosmosClient, CosmosDbContext dbContext) 
-	: GenericRepository<Test>(cosmosClient, dbContext), ITestRepository
+internal sealed class TestRepository(CosmosClient cosmosClient) 
+	: GenericRepository<Test>(cosmosClient), ITestRepository
 {
-	public async Task Create(Test entity)
+	public async Task CreateAsync(Test entity)
 	{
-		await base.CreateAsync(entity);
+		await base.CreateAsync(entity, entity.ShortName);
 	}
 
-	public async Task Update(Test entity)
+	public async Task UpdateAsync(Test entity)
 	{
-		await base.UpdateAsync(entity);
+		await base.UpdateAsync(entity, entity.ShortName);
 	}
 
-	public async Task Delete(Test entity)
+	public async Task DeleteAsync(Test entity)
 	{
-		await base.DeleteAsync(entity);
+		await base.DeleteAsync(entity, entity.ShortName);
 	}
 }

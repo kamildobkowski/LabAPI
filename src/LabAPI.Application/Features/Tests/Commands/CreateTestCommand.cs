@@ -14,7 +14,6 @@ internal sealed class CreateTestCommandHandler(ITestRepository repository, IMapp
 	public async Task Handle(CreateTestCommand request, CancellationToken cancellationToken)
 	{
 		var entity = mapper.Map<Test>(request.Dto);
-		await repository.Create(entity);
-		await repository.SaveChangesAsync();
+		await repository.CreateAsync(entity);
 	}
 } 

@@ -2,6 +2,7 @@ using System.Globalization;
 using System.Linq.Expressions;
 using LabAPI.Application.Common.Interfaces;
 using LabAPI.Domain.Common;
+using LabAPI.Domain.Exceptions;
 using LabAPI.Infrastructure.Persistence;
 using Microsoft.Azure.Cosmos;
 using Microsoft.Azure.Cosmos.Linq;
@@ -9,7 +10,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace LabAPI.Infrastructure.Repositories;
 
-public abstract class GenericRepository<T> (CosmosClient cosmosClient, CosmosDbContext dbContext) 
+public abstract class GenericRepository<T> (CosmosClient cosmosClient) 
 	: IPagination<T> where T : BaseEntity
 {
 
@@ -33,18 +34,28 @@ public abstract class GenericRepository<T> (CosmosClient cosmosClient, CosmosDbC
 		}
 	}
 
-	public virtual async Task CreateAsync(T entity, string? partitionKey=null)
+	public virtual async Task CreateAsync(T entity, string? partitionKey = null)
 		=> await _container.CreateItemAsync(entity);
+	
 
 
-	public virtual async Task UpdateAsync(T entity)
+	public virtual async Task UpdateAsync(T entity, string? partitionKey = null)
 	{
 		entity.ModifiedAt=DateTime.UtcNow;
 		await _container.UpsertItemAsync(entity);
 	}
 
-	public virtual Task DeleteAsync(T entity, string? partitionKey = null)
-		=> _container.DeleteItemAsync<T>(entity.Id.ToString(), new PartitionKey(partitionKey));
+	public virtual Task DeleteAsync(T entity, string partitionKey)
+	{
+		try
+		{
+			return _container.DeleteItemAsync<T>(entity.Id, new PartitionKey(partitionKey));
+		}
+		catch (CosmosException e) when (e.StatusCode == System.Net.HttpStatusCode.NotFound)
+		{
+			throw new NotFoundException(e.Message);
+		}
+	}
 	
 	protected virtual IQueryable<T> PaginationQuery(int page, int pageSize, Expression<Func<T, object>> orderBy,
 		Expression<Func<T, bool>> filter, bool asc = true)
@@ -123,7 +134,4 @@ public abstract class GenericRepository<T> (CosmosClient cosmosClient, CosmosDbC
 		}
 		
 	}
-
-	public virtual async Task SaveChangesAsync()
-		=> await dbContext.SaveChangesAsync();
 }

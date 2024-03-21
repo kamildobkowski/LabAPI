@@ -17,6 +17,6 @@ internal sealed class UpdateOrderCommandHandler(IOrderRepository repository, IMa
 		if (request.Dto.OrderNumber != request.OrderNumber)
 			throw new BadHttpRequestException("Invalid Order Number");
 		var entity = mapper.Map<Order>(request.Dto);
-		await repository.Update(entity);
+		await repository.UpdateAsync(entity);
 	}
 } 

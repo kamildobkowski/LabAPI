@@ -14,6 +14,6 @@ internal sealed class AddOrderResultsCommandHandler(IOrderRepository repository)
 		var entity = await repository.GetAsync(r => r.OrderNumber == request.Dto.OrderNumber);
 		entity!.Results = request.Dto.Results;
 		entity.CheckIfResultsAreReadyAndChangeStatus();
-		await repository.Update(entity);
+		await repository.UpdateAsync(entity);
 	}
 } 

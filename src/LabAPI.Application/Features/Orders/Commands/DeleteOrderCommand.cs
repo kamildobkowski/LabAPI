@@ -14,6 +14,6 @@ internal sealed class DeleteOrderCommandHandler(IOrderRepository repository)
 		var entity = await repository.GetAsync(r => r.OrderNumber == request.OrderNumber);
 		if (entity is null)
 			throw new NotFoundException();
-		await repository.Delete(entity);
+		await repository.DeleteAsync(entity);
 	}
 } 

@@ -14,7 +14,6 @@ internal sealed class DeleteTestCommandHandler(ITestRepository repository)
 		var entity = await repository.GetAsync(r => r.Id == request.Id);
 		if (entity is null)
 			throw new NotFoundException();
-		await repository.Delete(entity);
-		await repository.SaveChangesAsync();
+		await repository.DeleteAsync(entity);
 	}
 } 

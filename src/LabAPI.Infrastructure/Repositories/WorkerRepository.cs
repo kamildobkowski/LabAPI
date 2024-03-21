@@ -5,20 +5,20 @@ using Microsoft.Azure.Cosmos;
 
 namespace LabAPI.Infrastructure.Repositories;
 
-internal class WorkerRepository(CosmosClient cosmosClient, CosmosDbContext dbContext) 
-	: GenericRepository<Worker>(cosmosClient, dbContext), IWorkerRepository 
+internal class WorkerRepository(CosmosClient cosmosClient) 
+	: GenericRepository<Worker>(cosmosClient), IWorkerRepository 
 {
-	public async Task Create(Worker entity)
+	public async Task CreateAsync(Worker entity)
 	{
 		await base.CreateAsync(entity, entity.Id);
 	}
 
-	public async Task Update(Worker entity)
+	public async Task UpdateAsync(Worker entity)
 	{
 		await base.UpdateAsync(entity);
 	}
 
-	public async Task Delete(Worker entity)
+	public async Task DeleteAsync(Worker entity)
 	{
 		await base.DeleteAsync(entity, entity.Id);
 	}
