@@ -1,13 +1,14 @@
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
+using LabAPI.Application.Common.Interfaces;
 using LabAPI.Domain.Entities;
 using LabAPI.Domain.Enums;
 using Microsoft.IdentityModel.Tokens;
 
 namespace LabAPI.Infrastructure.Authentication;
 
-public sealed class JwtService(AuthenticationSettings authenticationSettings)
+public sealed class JwtService(AuthenticationSettings authenticationSettings) : IJwtService
 {
 	public string GenerateToken(Customer customer)
 	{

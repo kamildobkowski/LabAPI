@@ -1,4 +1,5 @@
 using System.Text;
+using LabAPI.Application.Common.Interfaces;
 using LabAPI.Application.Features.Accounts.Repository;
 using LabAPI.Application.Features.Orders.Repository;
 using LabAPI.Application.Features.Tests.Repository;
@@ -27,6 +28,7 @@ public static class DependencyInjection
 		services.AddDbContext<CosmosDbContext>();
 		services.AddScoped<ICustomerRepository, CustomerRepository>();
 		services.AddScoped<IPasswordHasher<Customer>, PasswordHasher<Customer>>();
+		services.AddScoped<IJwtService, JwtService>();
 		var authenticationSettings = new AuthenticationSettings();
 		configuration.GetSection("Authentication").Bind(authenticationSettings);
 
