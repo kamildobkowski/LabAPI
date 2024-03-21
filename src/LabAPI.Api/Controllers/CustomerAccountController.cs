@@ -11,14 +11,14 @@ namespace LabAPI.Api.Controllers;
 public sealed class CustomerAccountController(IMediator mediator) : ControllerBase
 {
 	[HttpPost("register")]
-	public async Task<ActionResult> RegisterCustomer([FromBody] RegisterCustomerDto dto)
+	public async Task<ActionResult> Register([FromBody] RegisterCustomerDto dto)
 	{
 		await mediator.Send(new RegisterCustomerCommand(dto));
 		return Ok();
 	}
 
 	[HttpPost("login")]
-	public async Task<ActionResult<string>> LoginCustomer([FromBody] LoginDto dto)
+	public async Task<ActionResult<string>> Login([FromBody] LoginDto dto)
 	{
 		var token = await mediator.Send(new LoginCustomerQuery(dto));
 		return Ok(token);
