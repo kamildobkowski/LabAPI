@@ -23,4 +23,11 @@ public sealed class CustomerAccountController(IMediator mediator) : ControllerBa
 		var token = await mediator.Send(new LoginCustomerQuery(dto));
 		return Ok(token);
 	}
+
+	[HttpPatch("changepassword")]
+	public async Task<ActionResult> ChangePassword([FromBody] ChangeCustomerPasswordDto dto)
+	{
+		await mediator.Send(new ChangeCustomerPasswordCommand(dto));
+		return Ok();
+	}
 }

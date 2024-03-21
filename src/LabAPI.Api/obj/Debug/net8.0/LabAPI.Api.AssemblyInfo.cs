@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("LabAPI.Api")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+5ddf83b4019ebd144b9991b33c63da9ad4e203e8")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+801d7e1915be3c918566a501d420acd8be15787c")]
 [assembly: System.Reflection.AssemblyProductAttribute("LabAPI.Api")]
 [assembly: System.Reflection.AssemblyTitleAttribute("LabAPI.Api")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
