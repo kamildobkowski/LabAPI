@@ -15,7 +15,7 @@ internal class WorkerRepository(CosmosClient cosmosClient)
 
 	public async Task UpdateAsync(Worker entity)
 	{
-		await base.UpdateAsync(entity);
+		await base.UpdateAsync(entity, entity.Id);
 	}
 
 	public async Task DeleteAsync(Worker entity)

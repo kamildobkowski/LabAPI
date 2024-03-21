@@ -29,7 +29,8 @@ public sealed class RegisterCustomerDtoValidation : AbstractValidator<RegisterCu
 		RuleFor(r => r.Password)
 			.NotEmpty()
 			.MinimumLength(8)
-			.Equal(r => r.RepeatPassword);
+			.Equal(r => r.RepeatPassword)
+			.Matches(@"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).*$");
 		RuleFor(r => r.Pesel)
 			.NotEmpty()
 			.Length(11);
