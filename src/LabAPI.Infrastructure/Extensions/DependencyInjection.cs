@@ -1,4 +1,5 @@
 using System.Text;
+using Azure.Storage.Files.Shares;
 using LabAPI.Application.Common.Interfaces;
 using LabAPI.Application.Features.Accounts.Repository;
 using LabAPI.Application.Features.Orders.Repository;
@@ -8,9 +9,11 @@ using LabAPI.Infrastructure.Authentication;
 using LabAPI.Infrastructure.Authorization.Policies;
 using LabAPI.Infrastructure.Persistence;
 using LabAPI.Infrastructure.Repositories;
+using LabAPI.Infrastructure.Services.Pdf;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Azure.Cosmos.Fluent;
+using Microsoft.Extensions.Azure;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
@@ -24,6 +27,8 @@ public static class DependencyInjection
 		services.AddRepositories(configuration);
 		services.AddJwtAuthentication(configuration);
 		services.AddCustomAuthorization(configuration);
+		services.AddSingleton<IPdfFileRepository, PdfFileRepository>();
+		services.AddScoped<IPdfService, PdfService>();
 	}
 
 	private static void AddRepositories(this IServiceCollection services, IConfiguration configuration)
