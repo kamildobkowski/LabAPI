@@ -38,6 +38,15 @@ public sealed class OrderController(IMediator mediator) : ControllerBase
 		var dto = await mediator.Send(new GetOrderQuery(orderNumber));
 		return Ok(dto);
 	}
+	
+	[HttpGet("pesel")]
+	[AllowAnonymous]
+	public async Task<ActionResult> GetFileByPesel([FromQuery] string pesel, [FromQuery] string orderNumber)
+	{
+		var file = await mediator.Send(new GetOrderResultByPeselQuery(new GetOrderByPeselDto(pesel, orderNumber)));
+		var filestream = new MemoryStream(file);
+		return File(filestream, "application/pdf", $"{orderNumber}.pdf");
+	}
 
 	[HttpDelete("{orderNumber}")]
 	public async Task<ActionResult> DeleteByOrderNumber([FromRoute] string orderNumber)

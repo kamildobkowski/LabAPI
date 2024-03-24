@@ -21,4 +21,9 @@ public sealed class PdfService(IPdfFileRepository pdfFileRepository, IOrderRepos
 		await orderRepository.UpdateAsync(order);
 	}
 	
+	public async Task<byte[]> GetOrderPdf(Order order)
+	{
+		var pdf = await pdfFileRepository.GetFile($"Order_{order.OrderNumber}.pdf");
+		return pdf;
+	}
 }

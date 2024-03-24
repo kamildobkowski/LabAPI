@@ -6,4 +6,5 @@ namespace LabAPI.Application.Common.Interfaces;
 public interface IPdfService
 {
 	Task CreateOrderPdf(Order order, OrderResultDocumentModel model);
+	Task<byte[]> GetOrderPdf(Order order);
 }

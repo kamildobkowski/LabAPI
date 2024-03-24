@@ -1,5 +1,6 @@
 using Azure;
 using Azure.Storage.Files.Shares;
+using Azure.Storage.Files.Shares.Models;
 using LabAPI.Application.Common.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
@@ -26,5 +27,20 @@ public sealed class PdfFileRepository(IConfiguration configuration) : IPdfFileRe
 			await file.CreateAsync(memoryStream.Length);
 			await file.UploadAsync(memoryStream);
 		}
+	}
+
+	public async Task<byte[]> GetFile(string fileName)
+	{
+		var client = new ShareClient(configuration.GetConnectionString("AzureFileShare"), "orderpdfs");
+		var directory = client.GetDirectoryClient("orderpdfs");
+
+		// Get a reference to a file and download it
+		ShareFileClient file = directory.GetFileClient(fileName);
+		Response<ShareFileDownloadInfo> downloadResponse = await file.DownloadAsync();
+
+		using var memoryStream = new MemoryStream();
+		await downloadResponse.Value.Content.CopyToAsync(memoryStream);
+
+		return memoryStream.ToArray();
 	}
 }
