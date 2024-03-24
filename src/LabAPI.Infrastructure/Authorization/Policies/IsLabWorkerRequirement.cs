@@ -20,8 +20,11 @@ public sealed class IsLabWorkerRequirementHandler : AuthorizationHandler<IsLabWo
 			return Task.CompletedTask;
 		}
 		var role = context.User.FindFirst(r => r.Type == Claims.Role);
-		if(!Enum.TryParse<UserRole>(role!.Value, ignoreCase: true, out var enRole))
+		if (!Enum.TryParse<UserRole>(role!.Value, ignoreCase: true, out var enRole))
+		{
 			context.Fail();
+			return Task.CompletedTask;
+		}
 		if(enRole != UserRole.Customer && enRole != UserRole.Admin)
 			context.Succeed(requirement);
 		return Task.CompletedTask;
