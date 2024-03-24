@@ -62,11 +62,11 @@ public sealed class CreateOrderResultDtoValidator : AbstractValidator<CreateOrde
 					return;
 				}
 
-				if (order.Results.Any(i => !val.Results.ContainsKey(i.Key)))
+				/* TODO if (order.Results.Any(i => !val.Results.ContainsKey(i.Key)))
 				{
 					c.AddFailure("Invalid Tests");
 					return;
-				}
+				}*/ 
 			});
 	}
 }

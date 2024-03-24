@@ -3,5 +3,6 @@ namespace LabAPI.Domain.Enums;
 public enum OrderStatus
 {
 	Registered,
-	ResultsReady
+	ResultsReady,
+	PdfReady
 }

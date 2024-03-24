@@ -10,6 +10,7 @@ namespace LabAPI.Api.Controllers;
 
 [ApiController]
 [Route("api/order")]
+[Authorize]
 [Authorize(Policy = "IsLabWorker")]
 public sealed class OrderController(IMediator mediator) : ControllerBase
 {

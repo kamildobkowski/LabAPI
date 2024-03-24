@@ -1,8 +1,9 @@
+using LabAPI.Domain.Entities;
 using LabAPI.Domain.ValueObjects;
 
 namespace LabAPI.Application.Common.Interfaces;
 
 public interface IPdfService
 {
-	void CreateOrderPdf(OrderResultDocumentModel model);
+	Task CreateOrderPdf(Order order, OrderResultDocumentModel model);
 }
