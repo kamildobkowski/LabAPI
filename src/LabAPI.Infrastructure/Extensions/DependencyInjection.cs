@@ -9,6 +9,7 @@ using LabAPI.Infrastructure.Authentication;
 using LabAPI.Infrastructure.Authorization.Policies;
 using LabAPI.Infrastructure.Persistence;
 using LabAPI.Infrastructure.Repositories;
+using LabAPI.Infrastructure.Services.Email;
 using LabAPI.Infrastructure.Services.Pdf;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -29,6 +30,7 @@ public static class DependencyInjection
 		services.AddCustomAuthorization(configuration);
 		services.AddSingleton<IPdfFileRepository, PdfFileRepository>();
 		services.AddScoped<IPdfService, PdfService>();
+		services.AddTransient<IEmailService, EmailService>();
 	}
 
 	private static void AddRepositories(this IServiceCollection services, IConfiguration configuration)

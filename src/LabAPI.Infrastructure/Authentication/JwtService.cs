@@ -17,7 +17,8 @@ public sealed class JwtService(AuthenticationSettings authenticationSettings) : 
 			new(Claims.Id, customer.Id),
 			new(Claims.FullName, $"{customer.Name} {customer.Surname}"),
 			new(Claims.Role, $"{customer.Role}"),
-			new(Claims.Email, $"{customer.Email}")
+			new(Claims.Email, $"{customer.Email}"),
+			new(Claims.Pesel, $"{customer.Pesel}")
 		};
 		return GenerateToken(claims);
 	}

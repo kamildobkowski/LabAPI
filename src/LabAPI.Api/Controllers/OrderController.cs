@@ -2,6 +2,7 @@ using LabAPI.Application.Features.Orders.Commands;
 using LabAPI.Application.Features.Orders.Dtos;
 using LabAPI.Application.Features.Orders.Queries;
 using LabAPI.Domain.Common;
+using LabAPI.Infrastructure.Authentication;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -41,8 +42,13 @@ public sealed class OrderController(IMediator mediator) : ControllerBase
 	
 	[HttpGet("pesel")]
 	[AllowAnonymous]
-	public async Task<ActionResult> GetFileByPesel([FromQuery] string pesel, [FromQuery] string orderNumber)
+	public async Task<ActionResult> GetFileByPesel([FromQuery] string? pesel, [FromQuery] string orderNumber)
 	{
+		var userPesel = User.Claims.FirstOrDefault(c => c.Type == Claims.Pesel)?.Value;
+		if (userPesel is not null && pesel is null)
+			pesel = userPesel;
+		if(pesel is null)
+			throw new BadHttpRequestException("No PESEL provided");
 		var file = await mediator.Send(new GetOrderResultByPeselQuery(new GetOrderByPeselDto(pesel, orderNumber)));
 		var filestream = new MemoryStream(file);
 		return File(filestream, "application/pdf", $"{orderNumber}.pdf");

@@ -8,5 +8,5 @@ public static class Claims
 	public const string FullName = ClaimTypes.Name;
 	public const string Role = ClaimTypes.Role;
 	public const string Email = ClaimTypes.Email;
-	public const string CollectionPointId = "CollectionPointIdentifier";
+	public const string Pesel = "Pesel";
 }
