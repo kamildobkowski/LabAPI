@@ -179,6 +179,10 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "dependencies": {
+            "Azure.Storage.Files.Shares": {
+              "target": "Package",
+              "version": "[12.17.1, )"
+            },
             "AzureAutoNumber": {
               "target": "Package",
               "version": "[1.4.0, )"
@@ -198,6 +202,10 @@
             "Microsoft.EntityFrameworkCore.Cosmos": {
               "target": "Package",
               "version": "[8.0.3, )"
+            },
+            "QuestPDF": {
+              "target": "Package",
+              "version": "[2023.12.6, )"
             }
           },
           "imports": [

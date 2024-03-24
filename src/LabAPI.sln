@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LabAPI.Domain", "LabAPI.Dom
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LabAPI.Infrastructure", "LabAPI.Infrastructure\LabAPI.Infrastructure.csproj", "{1E48014E-44ED-439E-A174-6DE8B6363A40}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LabAPI.Infrastructure.Tests", "LabAPI.Infrastructure.Tests\LabAPI.Infrastructure.Tests.csproj", "{788F5734-429C-420E-925B-C2CBFE82F907}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -36,5 +38,9 @@ Global
 		{1E48014E-44ED-439E-A174-6DE8B6363A40}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1E48014E-44ED-439E-A174-6DE8B6363A40}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1E48014E-44ED-439E-A174-6DE8B6363A40}.Release|Any CPU.Build.0 = Release|Any CPU
+		{788F5734-429C-420E-925B-C2CBFE82F907}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{788F5734-429C-420E-925B-C2CBFE82F907}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{788F5734-429C-420E-925B-C2CBFE82F907}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{788F5734-429C-420E-925B-C2CBFE82F907}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

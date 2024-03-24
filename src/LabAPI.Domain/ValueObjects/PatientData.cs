@@ -5,6 +5,8 @@ namespace LabAPI.Domain.ValueObjects;
 
 public sealed class PatientData
 {
+	public string Name { get; init; }
+	public string Surname { get; init; }
 	public string? Pesel { get; init; }
 	public DateOnly DateOfBirth { get; init; }
 	public string? Sex { get; init; }
@@ -14,13 +16,15 @@ public sealed class PatientData
 	{
 		
 	}
-	public PatientData(string? pesel, DateOnly? dateOfBirth, string? sex, Address? address)
+	public PatientData(string? pesel, DateOnly? dateOfBirth, string? sex, Address? address, string name, string surname)
 	{
 		if (pesel is not null)
 			Pesel = pesel;
 		DateOfBirth = dateOfBirth ?? GetDateOnlyFromPesel(pesel!);
 		Sex = sex;
 		Address = address;
+		Name = name;
+		Surname = surname;
 	}
 
 	private static DateOnly GetDateOnlyFromPesel(string pesel)

@@ -9,6 +9,8 @@ public sealed record CreateOrderDto
 	public string? Pesel { get; init; }
 	public DateOnly? DateOfBirth { get; init; }
 	public string? Sex { get; init; }
+	public string Name { get; init; } = null!;
+	public string Surname { get; init; } = null!;
 	public string AddressNumber { get; init; } = null!;
 	public string AddressStreet { get; init; } = null!;
 	public string AddressCity { get; init; } = null!;

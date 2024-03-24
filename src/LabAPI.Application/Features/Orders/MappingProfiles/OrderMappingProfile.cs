@@ -13,7 +13,8 @@ public sealed class OrderMappingProfile : Profile
 			.ForMember(r => r.PatientData,
 				c => c.MapFrom(s =>
 					new PatientData(s.Pesel, s.DateOfBirth, s.Sex!,
-						new Address(s.AddressNumber, s.AddressStreet, s.AddressCity, s.AddressPostalCode))))
+						new Address(s.AddressNumber, s.AddressStreet, s.AddressCity, s.AddressPostalCode),
+						s.Name, s.Surname)))
 			.ForMember(r => r.Results, c =>
 				c.MapFrom(s =>
 					s.Tests.ToDictionary<string?, string, Dictionary<string, string>?>(i => i, i => null)));
@@ -28,6 +29,7 @@ public sealed class OrderMappingProfile : Profile
 			.ForMember(r => r.PatientData,
 				c => c.MapFrom(s =>
 					new PatientData(s.Pesel, s.DateOfBirth, s.Sex!,
-						new Address(s.AddressNumber, s.AddressStreet, s.AddressCity, s.AddressPostalCode))));
+						new Address(s.AddressNumber, s.AddressStreet, s.AddressCity, s.AddressPostalCode),
+						s.Name, s.Surname)));
 	}
 }
