@@ -14,6 +14,11 @@ public sealed class IsLabWorkerRequirementHandler : AuthorizationHandler<IsLabWo
 {
 	protected override Task HandleRequirementAsync(AuthorizationHandlerContext context, IsLabWorkerRequirement requirement)
 	{
+		if(!context.User.Identity?.IsAuthenticated ?? true)
+		{
+			context.Fail();
+			return Task.CompletedTask;
+		}
 		var role = context.User.FindFirst(r => r.Type == Claims.Role);
 		if(!Enum.TryParse<UserRole>(role!.Value, ignoreCase: true, out var enRole))
 			context.Fail();
