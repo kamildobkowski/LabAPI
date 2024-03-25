@@ -48,7 +48,7 @@ public sealed class CreateOrderDtoValidator : AbstractValidator<CreateOrderDto>
 			{
 				foreach (var i in s)
 				{
-					var test = testRepository.GetAsync(r => r.Id == i).Result;
+					var test = testRepository.GetAsync(r => r.ShortName == i).Result;
 					if (test is null)
 						c.AddFailure("Incorrect tests");
 				}
