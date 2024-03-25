@@ -46,9 +46,17 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "dependencies": {
+            "HarfBuzzSharp.NativeAssets.Linux": {
+              "target": "Package",
+              "version": "[7.3.0.1, )"
+            },
             "MediatR": {
               "target": "Package",
               "version": "[12.2.0, )"
+            },
+            "SkiaSharp.NativeAssets.Linux.NoDependencies": {
+              "target": "Package",
+              "version": "[2.88.7, )"
             },
             "Swashbuckle.AspNetCore": {
               "target": "Package",

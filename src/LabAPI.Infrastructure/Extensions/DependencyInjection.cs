@@ -1,5 +1,4 @@
 using System.Text;
-using Azure.Storage.Files.Shares;
 using LabAPI.Application.Common.Interfaces;
 using LabAPI.Application.Features.Accounts.Repository;
 using LabAPI.Application.Features.Orders.Repository;
@@ -7,17 +6,17 @@ using LabAPI.Application.Features.Tests.Repository;
 using LabAPI.Domain.Entities;
 using LabAPI.Infrastructure.Authentication;
 using LabAPI.Infrastructure.Authorization.Policies;
-using LabAPI.Infrastructure.Persistence;
 using LabAPI.Infrastructure.Repositories;
 using LabAPI.Infrastructure.Services.Email;
 using LabAPI.Infrastructure.Services.Pdf;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Azure.Cosmos.Fluent;
-using Microsoft.Extensions.Azure;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
+using QuestPDF.Drawing;
+using QuestPDF.Infrastructure;
 
 namespace LabAPI.Infrastructure.Extensions;
 
@@ -25,6 +24,9 @@ public static class DependencyInjection
 {
 	public static void AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
 	{
+		var fontStream = File.OpenRead("wwwroot/fonts/Arial.ttf");
+		FontManager.RegisterFontWithCustomName("ArialLocal", fontStream);
+		QuestPDF.Settings.License = LicenseType.Community;
 		services.AddRepositories(configuration);
 		services.AddJwtAuthentication(configuration);
 		services.AddCustomAuthorization(configuration);
@@ -36,7 +38,7 @@ public static class DependencyInjection
 	private static void AddRepositories(this IServiceCollection services, IConfiguration configuration)
 	{
 		var cosmosClient =
-			new CosmosClientBuilder(configuration.GetConnectionString("AzureCosmosDb"))
+			new CosmosClientBuilder(Environment.GetEnvironmentVariable("AZURECOSMOSDB_CONNECTIONSTRING"))
 				.Build();
 		services.AddSingleton(cosmosClient);
 		services.AddScoped<IOrderRepository, OrderRepository>();

@@ -2,8 +2,6 @@ using System.Net;
 using System.Net.Mail;
 using LabAPI.Application.Common.Interfaces;
 using Microsoft.Extensions.Configuration;
-using RazorEngine;
-using RazorEngine.Templating;
 
 namespace LabAPI.Infrastructure.Services.Email;
 
@@ -29,8 +27,8 @@ public sealed class EmailService(IConfiguration configuration) : IEmailService
 
 	private async Task SendEmail(string subject, string email, string body, string name, string surname)
 	{
-		var fromMail = configuration["Email:Address"];
-		var fromPassword = configuration["Email:Password"];
+		var fromMail = Environment.GetEnvironmentVariable("EMAIL_ADDRESS");
+		var fromPassword = Environment.GetEnvironmentVariable("EMAIL_PASSWORD");
 
 		if (fromMail is null || fromPassword is null)
 			throw new Exception();
@@ -40,7 +38,7 @@ public sealed class EmailService(IConfiguration configuration) : IEmailService
 
 		var smtp = new SmtpClient
 		{
-			Host = "smtp-mail.outlook.com",
+			Host = Environment.GetEnvironmentVariable("EMAIL_SMTP")!,
 			Port = 587,
 			EnableSsl = true,
 			DeliveryMethod = SmtpDeliveryMethod.Network,

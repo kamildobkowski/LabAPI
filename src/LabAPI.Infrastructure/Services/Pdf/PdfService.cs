@@ -15,12 +15,12 @@ public sealed class PdfService(IPdfFileRepository pdfFileRepository, IOrderRepos
 {
 	public async Task CreateOrderPdf(Order order, OrderResultDocumentModel model)
 	{
-		QuestPDF.Settings.License = LicenseType.Community;
 		var doc = new OrderResultsDocument(model);
 		var document = doc.GeneratePdf();
 		await pdfFileRepository.UploadFile(document, $"Order_{model.OrderNumber}.pdf");
 		order.Status = OrderStatus.PdfReady;
 		await orderRepository.UpdateAsync(order);
+		
 		var customer = await customerRepository.GetAsync(r => r.Pesel == order.PatientData.Pesel);
 		if (customer is not null)
 		{

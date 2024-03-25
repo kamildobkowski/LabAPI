@@ -1,6 +1,7 @@
 using System.Text;
 using LabAPI.Domain.ValueObjects;
 using Microsoft.Extensions.Primitives;
+using QuestPDF.Drawing;
 using QuestPDF.Fluent;
 using QuestPDF.Helpers;
 using QuestPDF.Infrastructure;
@@ -56,14 +57,14 @@ internal sealed class TestComponent : IComponent
 						table.Cell().AlignLeft().Text(t =>
 						{
 							t.Span("\u2191")
-								.FontFamily(Fonts.Arial)
+								.FontFamily("ArialLocal")
 								.FontColor(Colors.Red.Medium);
 						});
 					else
 						table.Cell().AlignLeft().Text(t =>
 						{
 							t.Span("\u2193")
-								.FontFamily(Fonts.Arial)
+								.FontFamily("ArialLocal")
 								.FontColor(Colors.Red.Medium);
 						});
 				}

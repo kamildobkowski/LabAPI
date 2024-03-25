@@ -1,6 +1,5 @@
 using LabAPI.Domain.ValueObjects;
 using QuestPDF.Fluent;
-using QuestPDF.Helpers;
 using QuestPDF.Infrastructure;
 
 namespace LabAPI.Infrastructure.Services.Pdf.OrderResults;
@@ -23,8 +22,4 @@ public partial class OrderResultsDocument(OrderResultDocumentModel model) : IDoc
 					.Height(50);
 			});
 	}
-	
-	
-
-	
 }

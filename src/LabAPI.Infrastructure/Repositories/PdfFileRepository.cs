@@ -13,10 +13,10 @@ public sealed class PdfFileRepository(IConfiguration configuration) : IPdfFileRe
 	public async Task UploadFile(byte[] fileByteArray, string fileName)
 	{
 		var client =
-			new ShareClient(configuration.GetConnectionString("AzureFileShare"), "orderpdfs");
+			new ShareClient(Environment.GetEnvironmentVariable("AZUREFILESHARE_CONNECTIONSTRING"), "orderpdfs");
 		var directory = client.GetDirectoryClient("orderpdfs");
 		
-		directory.CreateIfNotExists();
+		await directory.CreateIfNotExistsAsync();
 
 		using var memoryStream = new MemoryStream(fileByteArray);
 		if (await directory.ExistsAsync())
@@ -31,10 +31,9 @@ public sealed class PdfFileRepository(IConfiguration configuration) : IPdfFileRe
 
 	public async Task<byte[]> GetFile(string fileName)
 	{
-		var client = new ShareClient(configuration.GetConnectionString("AzureFileShare"), "orderpdfs");
+		var client = new ShareClient(Environment.GetEnvironmentVariable("AZUREFILESHARE_CONNECTIONSTRING"), "orderpdfs");
 		var directory = client.GetDirectoryClient("orderpdfs");
-
-		// Get a reference to a file and download it
+		
 		ShareFileClient file = directory.GetFileClient(fileName);
 		Response<ShareFileDownloadInfo> downloadResponse = await file.DownloadAsync();
 

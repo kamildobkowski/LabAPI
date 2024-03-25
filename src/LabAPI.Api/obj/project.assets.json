@@ -188,6 +188,36 @@
           }
         }
       },
+      "HarfBuzzSharp.NativeAssets.Linux/7.3.0.1": {
+        "type": "package",
+        "dependencies": {
+          "HarfBuzzSharp": "7.3.0.1"
+        },
+        "compile": {
+          "lib/net6.0/_._": {}
+        },
+        "runtime": {
+          "lib/net6.0/_._": {}
+        },
+        "runtimeTargets": {
+          "runtimes/linux-arm/native/libHarfBuzzSharp.so": {
+            "assetType": "native",
+            "rid": "linux-arm"
+          },
+          "runtimes/linux-arm64/native/libHarfBuzzSharp.so": {
+            "assetType": "native",
+            "rid": "linux-arm64"
+          },
+          "runtimes/linux-musl-x64/native/libHarfBuzzSharp.so": {
+            "assetType": "native",
+            "rid": "linux-musl-x64"
+          },
+          "runtimes/linux-x64/native/libHarfBuzzSharp.so": {
+            "assetType": "native",
+            "rid": "linux-x64"
+          }
+        }
+      },
       "HarfBuzzSharp.NativeAssets.macOS/7.3.0.1": {
         "type": "package",
         "compile": {
@@ -986,6 +1016,36 @@
         "runtime": {
           "lib/net6.0/SkiaSharp.HarfBuzz.dll": {
             "related": ".pdb;.xml"
+          }
+        }
+      },
+      "SkiaSharp.NativeAssets.Linux.NoDependencies/2.88.7": {
+        "type": "package",
+        "dependencies": {
+          "SkiaSharp": "2.88.7"
+        },
+        "compile": {
+          "lib/net6.0/_._": {}
+        },
+        "runtime": {
+          "lib/net6.0/_._": {}
+        },
+        "runtimeTargets": {
+          "runtimes/linux-arm/native/libSkiaSharp.so": {
+            "assetType": "native",
+            "rid": "linux-arm"
+          },
+          "runtimes/linux-arm64/native/libSkiaSharp.so": {
+            "assetType": "native",
+            "rid": "linux-arm64"
+          },
+          "runtimes/linux-musl-x64/native/libSkiaSharp.so": {
+            "assetType": "native",
+            "rid": "linux-musl-x64"
+          },
+          "runtimes/linux-x64/native/libSkiaSharp.so": {
+            "assetType": "native",
+            "rid": "linux-x64"
           }
         }
       },
@@ -1794,6 +1854,29 @@
         "lib/xamarinwatchos1.0/HarfBuzzSharp.dll",
         "lib/xamarinwatchos1.0/HarfBuzzSharp.pdb",
         "lib/xamarinwatchos1.0/HarfBuzzSharp.xml"
+      ]
+    },
+    "HarfBuzzSharp.NativeAssets.Linux/7.3.0.1": {
+      "sha512": "8CH54W2peBhE3vBN10gx4+2lLTrVoHAY+OrTO2OqXo3QkKJaH3hMG6dTKSWOy88hr0xjQ4j4jBYdYBjMcCK8Xw==",
+      "type": "package",
+      "path": "harfbuzzsharp.nativeassets.linux/7.3.0.1",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE.txt",
+        "THIRD-PARTY-NOTICES.txt",
+        "build/net462/HarfBuzzSharp.NativeAssets.Linux.targets",
+        "buildTransitive/net462/HarfBuzzSharp.NativeAssets.Linux.targets",
+        "harfbuzzsharp.nativeassets.linux.7.3.0.1.nupkg.sha512",
+        "harfbuzzsharp.nativeassets.linux.nuspec",
+        "lib/net462/_._",
+        "lib/net6.0/_._",
+        "lib/netcoreapp3.1/_._",
+        "lib/netstandard1.3/_._",
+        "runtimes/linux-arm/native/libHarfBuzzSharp.so",
+        "runtimes/linux-arm64/native/libHarfBuzzSharp.so",
+        "runtimes/linux-musl-x64/native/libHarfBuzzSharp.so",
+        "runtimes/linux-x64/native/libHarfBuzzSharp.so"
       ]
     },
     "HarfBuzzSharp.NativeAssets.macOS/7.3.0.1": {
@@ -3269,6 +3352,29 @@
         "skiasharp.harfbuzz.nuspec"
       ]
     },
+    "SkiaSharp.NativeAssets.Linux.NoDependencies/2.88.7": {
+      "sha512": "KkMftfAz1lGPnuhyecuLJzeyvMjXtHp9cYVQc/oeLhF8KYrxtUxRy5LOX5oROhyLHy/CyqEl9MoAhqmSH7cV7g==",
+      "type": "package",
+      "path": "skiasharp.nativeassets.linux.nodependencies/2.88.7",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE.txt",
+        "THIRD-PARTY-NOTICES.txt",
+        "build/net462/SkiaSharp.NativeAssets.Linux.NoDependencies.targets",
+        "buildTransitive/net462/SkiaSharp.NativeAssets.Linux.NoDependencies.targets",
+        "lib/net462/_._",
+        "lib/net6.0/_._",
+        "lib/netcoreapp3.1/_._",
+        "lib/netstandard1.3/_._",
+        "runtimes/linux-arm/native/libSkiaSharp.so",
+        "runtimes/linux-arm64/native/libSkiaSharp.so",
+        "runtimes/linux-musl-x64/native/libSkiaSharp.so",
+        "runtimes/linux-x64/native/libSkiaSharp.so",
+        "skiasharp.nativeassets.linux.nodependencies.2.88.7.nupkg.sha512",
+        "skiasharp.nativeassets.linux.nodependencies.nuspec"
+      ]
+    },
     "SkiaSharp.NativeAssets.macOS/2.88.7": {
       "sha512": "3jNzco4VjcYPFNxR9aNWcgweFXbTSdM1VpNRzCS4X0i1A1OuNqcaulrAvmntNpujeWxHo9e6WGh6FN8Jf5+XhA==",
       "type": "package",
@@ -4144,9 +4250,11 @@
   },
   "projectFileDependencyGroups": {
     "net8.0": [
+      "HarfBuzzSharp.NativeAssets.Linux >= 7.3.0.1",
       "LabAPI.Application >= 1.0.0",
       "LabAPI.Infrastructure >= 1.0.0",
       "MediatR >= 12.2.0",
+      "SkiaSharp.NativeAssets.Linux.NoDependencies >= 2.88.7",
       "Swashbuckle.AspNetCore >= 6.4.0"
     ]
   },
@@ -4195,9 +4303,17 @@
       "net8.0": {
         "targetAlias": "net8.0",
         "dependencies": {
+          "HarfBuzzSharp.NativeAssets.Linux": {
+            "target": "Package",
+            "version": "[7.3.0.1, )"
+          },
           "MediatR": {
             "target": "Package",
             "version": "[12.2.0, )"
+          },
+          "SkiaSharp.NativeAssets.Linux.NoDependencies": {
+            "target": "Package",
+            "version": "[2.88.7, )"
           },
           "Swashbuckle.AspNetCore": {
             "target": "Package",

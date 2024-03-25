@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "0z1PRMBYi7vDYHVWHaXUvZzIJJ9HVwcGSr00TL6a+7l9Zpm9IfJ2l1FR1Bx0ZeBCRZfba+zRdxuj8QSF3Dem/w==",
+  "dgSpecHash": "FDtkZKdS73k9xdXdGzq6/b6V1pTMHPwTCve9IR+uU9bAxFLlJ+FZ/ABluTbIOheBRhcuf/P/WR3Kb9ZxVKoW5A==",
   "success": true,
   "projectFilePath": "/Users/kamil/Documents/LabAPI/src/LabAPI.Api/LabAPI.Api.csproj",
   "expectedPackageFiles": [
@@ -15,6 +15,7 @@
     "/Users/kamil/.nuget/packages/fluentvalidation.aspnetcore/11.3.0/fluentvalidation.aspnetcore.11.3.0.nupkg.sha512",
     "/Users/kamil/.nuget/packages/fluentvalidation.dependencyinjectionextensions/11.9.0/fluentvalidation.dependencyinjectionextensions.11.9.0.nupkg.sha512",
     "/Users/kamil/.nuget/packages/harfbuzzsharp/7.3.0.1/harfbuzzsharp.7.3.0.1.nupkg.sha512",
+    "/Users/kamil/.nuget/packages/harfbuzzsharp.nativeassets.linux/7.3.0.1/harfbuzzsharp.nativeassets.linux.7.3.0.1.nupkg.sha512",
     "/Users/kamil/.nuget/packages/harfbuzzsharp.nativeassets.macos/7.3.0.1/harfbuzzsharp.nativeassets.macos.7.3.0.1.nupkg.sha512",
     "/Users/kamil/.nuget/packages/harfbuzzsharp.nativeassets.win32/7.3.0.1/harfbuzzsharp.nativeassets.win32.7.3.0.1.nupkg.sha512",
     "/Users/kamil/.nuget/packages/mediatr/12.2.0/mediatr.12.2.0.nupkg.sha512",
@@ -57,6 +58,7 @@
     "/Users/kamil/.nuget/packages/razorengine.netcore/3.1.0/razorengine.netcore.3.1.0.nupkg.sha512",
     "/Users/kamil/.nuget/packages/skiasharp/2.88.7/skiasharp.2.88.7.nupkg.sha512",
     "/Users/kamil/.nuget/packages/skiasharp.harfbuzz/2.88.7/skiasharp.harfbuzz.2.88.7.nupkg.sha512",
+    "/Users/kamil/.nuget/packages/skiasharp.nativeassets.linux.nodependencies/2.88.7/skiasharp.nativeassets.linux.nodependencies.2.88.7.nupkg.sha512",
     "/Users/kamil/.nuget/packages/skiasharp.nativeassets.macos/2.88.7/skiasharp.nativeassets.macos.2.88.7.nupkg.sha512",
     "/Users/kamil/.nuget/packages/skiasharp.nativeassets.win32/2.88.7/skiasharp.nativeassets.win32.2.88.7.nupkg.sha512",
     "/Users/kamil/.nuget/packages/swashbuckle.aspnetcore/6.4.0/swashbuckle.aspnetcore.6.4.0.nupkg.sha512",
