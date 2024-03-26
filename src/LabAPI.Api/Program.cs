@@ -18,7 +18,7 @@ var logger = Log.Logger = new LoggerConfiguration()
         outputTemplate: "{Timestamp:yyyy-MM-dd HH:mm:ss.fff zzz} [{Level:u3}] {Message:lj}{NewLine}{Exception}",
         restrictedToMinimumLevel: LogEventLevel.Information,
         batchPostingLimit: 50,
-        period: TimeSpan.FromSeconds(2),
+        period: TimeSpan.FromSeconds(10),
         formatProvider: null,
         writeInBatches: true)
     .CreateLogger();
