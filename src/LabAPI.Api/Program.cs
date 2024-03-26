@@ -8,7 +8,7 @@ using Serilog.Events;
 
 var builder = WebApplication.CreateBuilder(args);
 
-var logger = new LoggerConfiguration()
+var logger = Log.Logger = new LoggerConfiguration()
     .WriteTo.Console()
     .WriteTo.Debug()
     .WriteTo.AzureBlobStorage(
