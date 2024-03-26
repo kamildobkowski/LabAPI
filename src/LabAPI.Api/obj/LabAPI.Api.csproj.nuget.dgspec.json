@@ -66,6 +66,14 @@
               "target": "Package",
               "version": "[3.3.0, )"
             },
+            "Serilog.Sinks.Console": {
+              "target": "Package",
+              "version": "[5.0.1, )"
+            },
+            "Serilog.Sinks.Debug": {
+              "target": "Package",
+              "version": "[2.0.0, )"
+            },
             "SkiaSharp.NativeAssets.Linux.NoDependencies": {
               "target": "Package",
               "version": "[2.88.7, )"

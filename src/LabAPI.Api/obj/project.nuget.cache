@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "JxAjSsaJnAKbDbq0ZaaSMsvDDMsNKx/ImGbPYt98uzefuaKM8GDZKNXjqq9DLKxeQvLXMpzbZqfY26KUuD1/kA==",
+  "dgSpecHash": "Qod+Wqxq6BeI98kSE4VO3JK2rDth5++EcYBf2bAMRJGWj/5DX2qrGx8eS9LMqbq53gyUSd0+xPrtZ9vuiKccFg==",
   "success": true,
   "projectFilePath": "/Users/kamil/Documents/LabAPI/src/LabAPI.Api/LabAPI.Api.csproj",
   "expectedPackageFiles": [
@@ -85,7 +85,7 @@
     "/Users/kamil/.nuget/packages/serilog.formatting.compact/2.0.0/serilog.formatting.compact.2.0.0.nupkg.sha512",
     "/Users/kamil/.nuget/packages/serilog.settings.configuration/8.0.0/serilog.settings.configuration.8.0.0.nupkg.sha512",
     "/Users/kamil/.nuget/packages/serilog.sinks.azureblobstorage/3.3.0/serilog.sinks.azureblobstorage.3.3.0.nupkg.sha512",
-    "/Users/kamil/.nuget/packages/serilog.sinks.console/5.0.0/serilog.sinks.console.5.0.0.nupkg.sha512",
+    "/Users/kamil/.nuget/packages/serilog.sinks.console/5.0.1/serilog.sinks.console.5.0.1.nupkg.sha512",
     "/Users/kamil/.nuget/packages/serilog.sinks.debug/2.0.0/serilog.sinks.debug.2.0.0.nupkg.sha512",
     "/Users/kamil/.nuget/packages/serilog.sinks.file/5.0.0/serilog.sinks.file.5.0.0.nupkg.sha512",
     "/Users/kamil/.nuget/packages/serilog.sinks.periodicbatching/3.1.0/serilog.sinks.periodicbatching.3.1.0.nupkg.sha512",

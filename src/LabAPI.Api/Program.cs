@@ -8,7 +8,9 @@ using Serilog.Events;
 
 var builder = WebApplication.CreateBuilder(args);
 
-var logger = Log.Logger = new LoggerConfiguration()
+var logger = new LoggerConfiguration()
+    .WriteTo.Console()
+    .WriteTo.Debug()
     .WriteTo.AzureBlobStorage(
         connectionString: Environment.GetEnvironmentVariable("AZUREFILESHARE_CONNECTIONSTRING"),
         storageContainerName: "logs",
@@ -21,9 +23,9 @@ var logger = Log.Logger = new LoggerConfiguration()
         writeInBatches: true)
     .CreateLogger();
 
-logger.Write(LogEventLevel.Information, "Application started");
-
 builder.Services.AddSerilog();
+
+logger.Write(LogEventLevel.Information, "Application started");
 
 builder.Services.AddApplication();
 builder.Services.AddInfrastructure(builder.Configuration);

@@ -8,11 +8,13 @@ namespace LabAPI.Api.Controllers;
 
 [ApiController]
 [Route("/api/customer")]
-public sealed class CustomerAccountController(IMediator mediator) : ControllerBase
+public sealed class CustomerAccountController(IMediator mediator, ILogger<CustomerAccountController> logger) 
+	: ControllerBase
 {
 	[HttpPost("register")]
 	public async Task<ActionResult> Register([FromBody] RegisterCustomerDto dto)
 	{
+		logger.LogInformation("Customer Register endpoint invoked");
 		await mediator.Send(new RegisterCustomerCommand(dto));
 		return Ok();
 	}
@@ -20,6 +22,7 @@ public sealed class CustomerAccountController(IMediator mediator) : ControllerBa
 	[HttpPost("login")]
 	public async Task<ActionResult<string>> Login([FromBody] LoginDto dto)
 	{
+		logger.LogInformation("Customer Login endpoint invoked");
 		var token = await mediator.Send(new LoginCustomerQuery(dto));
 		return Ok(token);
 	}
@@ -27,6 +30,7 @@ public sealed class CustomerAccountController(IMediator mediator) : ControllerBa
 	[HttpPatch("changepassword")]
 	public async Task<ActionResult> ChangePassword([FromBody] ChangeCustomerPasswordDto dto)
 	{
+		logger.LogInformation("Customer ChangePassword endpoint invoked");
 		await mediator.Send(new ChangeCustomerPasswordCommand(dto));
 		return Ok();
 	}

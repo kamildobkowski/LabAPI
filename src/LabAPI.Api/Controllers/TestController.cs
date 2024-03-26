@@ -12,11 +12,12 @@ namespace LabAPI.Api.Controllers;
 [ApiController]
 [Route("api/tests")]
 [Authorize(Policy = "IsLabWorker")]
-public class TestController(IMediator mediator) : ControllerBase
+public class TestController(IMediator mediator, ILogger<TestController> logger) : ControllerBase
 {
 	[HttpPost]
 	public async Task<ActionResult> CreateTest([FromBody] CreateTestDto dto)
 	{
+		logger.LogInformation("Create Test endpoint invoked");
 		await mediator.Send(new CreateTestCommand(dto));
 		return Created();
 	}
@@ -24,6 +25,7 @@ public class TestController(IMediator mediator) : ControllerBase
 	[HttpGet("{id}")]
 	public async Task<ActionResult<TestDto>> Get([FromRoute] string id)
 	{
+		logger.LogInformation("Get Test endpoint invoked");
 		var dto = await mediator.Send(new GetTestQuery(id));
 		return Ok(dto);
 	}
@@ -31,6 +33,7 @@ public class TestController(IMediator mediator) : ControllerBase
 	[HttpDelete("{id}")]
 	public async Task<ActionResult> Delete([FromRoute] string id)
 	{
+		logger.LogInformation("Delete Test endpoint invoked");
 		await mediator.Send(new DeleteTestCommand(id));
 		return NoContent();
 	}
@@ -38,6 +41,7 @@ public class TestController(IMediator mediator) : ControllerBase
 	[HttpPut("{id}")]
 	public async Task<ActionResult> Update([FromRoute] string id, [FromBody] UpdateTestDto dto)
 	{
+		logger.LogInformation("Update Test endpoint invoked");
 		await mediator.Send(new UpdateTestCommand(id, dto));
 		return Ok();
 	}
@@ -47,6 +51,7 @@ public class TestController(IMediator mediator) : ControllerBase
 		[FromQuery] string? filterBy = null, [FromQuery] string? filter = null, [FromQuery] string? orderBy = null, 
 		[FromQuery] bool asc = true)
 	{
+		logger.LogInformation("Get Tests Page endpoint invoked");
 		var pagedList = await mediator.Send(new GetAllTestsQuery(page, pageSize, filterBy, filter, orderBy, asc));
 		return Ok(pagedList);
 	}
