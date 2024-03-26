@@ -33,7 +33,13 @@ public sealed class RegisterCustomerDtoValidation : AbstractValidator<RegisterCu
 			.Matches(@"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).*$");
 		RuleFor(r => r.Pesel)
 			.NotEmpty()
-			.Length(11);
+			.Length(11)
+			.Custom((s, context) =>
+			{
+				var entity = customerRepository.GetAsync(r => r.Pesel == s).Result;
+				if (entity is not null)
+					context.AddFailure("Pesel is already linked to different account");
+			});
 		RuleFor(r => r.Name)
 			.NotEmpty()
 			.Matches(@"^[A-Za-z]+$")
