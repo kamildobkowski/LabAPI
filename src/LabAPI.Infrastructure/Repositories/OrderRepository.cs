@@ -4,11 +4,12 @@ using LabAPI.Infrastructure.Persistence;
 using Microsoft.Azure.Cosmos;
 using Microsoft.Azure.Cosmos.Linq;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 
 namespace LabAPI.Infrastructure.Repositories;
 
-internal sealed class OrderRepository(CosmosClient cosmosClient) 
-	:  GenericRepository<Order>(cosmosClient), IOrderRepository
+internal sealed class OrderRepository(CosmosClient cosmosClient, ILogger<OrderRepository> logger) 
+	:  GenericRepository<Order>(cosmosClient, logger), IOrderRepository
 {
 	private readonly Container _container = cosmosClient.GetContainer("LabApi", nameof(Order) + "s");
 

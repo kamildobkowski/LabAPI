@@ -12,8 +12,8 @@ public sealed class EmailService(IConfiguration configuration) : IEmailService
 		try
 		{
 			var body = $"""
-			                    Witaj {name} {surname},
-			                    Pojawiły się nowe wyniki związane z twoim kontem. Zaloguj się, aby je pobrać
+			            Witaj {name} {surname},
+			            Pojawiły się nowe wyniki związane z twoim kontem. Zaloguj się, aby je pobrać
 			            """;
 
 			await SendEmail("Wyniki gotowe", email, body, name, surname);

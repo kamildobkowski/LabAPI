@@ -4,13 +4,15 @@ using LabAPI.Application.Common.Interfaces;
 using LabAPI.Domain.Common;
 using LabAPI.Domain.Exceptions;
 using LabAPI.Infrastructure.Persistence;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Azure.Cosmos;
 using Microsoft.Azure.Cosmos.Linq;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 
 namespace LabAPI.Infrastructure.Repositories;
 
-public abstract class GenericRepository<T> (CosmosClient cosmosClient) 
+public abstract class GenericRepository<T> (CosmosClient cosmosClient, ILogger<GenericRepository<T>> logger) 
 	: IPagination<T> where T : BaseEntity
 {
 
@@ -35,14 +37,40 @@ public abstract class GenericRepository<T> (CosmosClient cosmosClient)
 	}
 
 	public virtual async Task CreateAsync(T entity, string? partitionKey = null)
-		=> await _container.CreateItemAsync(entity);
+	{
+		try
+		{
+			await _container.CreateItemAsync(entity);
+			logger.LogInformation($"Created entity {nameof(T)}");
+		}
+		catch (CosmosException e) when (e.StatusCode == System.Net.HttpStatusCode.Conflict)
+		{
+			logger.LogError(e.Message, e);
+			throw new BadHttpRequestException("Entity already exists");
+		}
+		catch(CosmosException e)
+		{
+			logger.LogError(e.Message, e);
+			throw new BadHttpRequestException("Error while creating entity");
+		}
+		
+	}
 	
 
 
 	public virtual async Task UpdateAsync(T entity, string? partitionKey = null)
 	{
-		entity.ModifiedAt=DateTime.UtcNow;
-		var i = await _container.UpsertItemAsync(entity);
+		try
+		{
+			entity.ModifiedAt=DateTime.UtcNow;
+			var i = await _container.UpsertItemAsync(entity);
+			logger.LogInformation($"Updated entity {nameof(T)} with id {entity.Id}");
+		}
+		catch(CosmosException e)
+		{
+			logger.LogError(e.Message, e);
+			throw new BadHttpRequestException("Error while updating entity");
+		}
 	}
 
 	public virtual Task DeleteAsync(T entity, string partitionKey)
@@ -123,15 +151,26 @@ public abstract class GenericRepository<T> (CosmosClient cosmosClient)
 	}
 	public async Task<PagedList<T>> GetPageAsync(int page, int pageSize, string? filterBy, string? filter, string? orderBy ,bool sortOrder = true)
 	{
-		using var q = PaginationQuery(page, pageSize, filterBy, filter, orderBy, sortOrder).ToFeedIterator();
+		try
 		{
-			var list = new List<T>();
-			while (q.HasMoreResults)
+			using var q = PaginationQuery(page, pageSize, filterBy, filter, orderBy, sortOrder).ToFeedIterator();
 			{
-				list.AddRange(await q.ReadNextAsync());
+				var list = new List<T>();
+				while (q.HasMoreResults)
+				{
+					list.AddRange(await q.ReadNextAsync());
+				}
+
+				logger.LogInformation($"Get Page of {nameof(T)}");
+				return new PagedList<T>(list, page, pageSize, list.Count);
 			}
-			return new PagedList<T>(list, page, pageSize, list.Count);
 		}
+		catch (Exception e)
+		{
+			logger.LogError("e.Message", [e]);
+			throw new BadHttpRequestException("Error while getting page");
+		}
+		
 		
 	}
 }

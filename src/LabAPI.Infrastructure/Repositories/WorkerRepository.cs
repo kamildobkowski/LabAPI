@@ -2,11 +2,12 @@ using LabAPI.Application.Features.Accounts.Repository;
 using LabAPI.Domain.Entities;
 using LabAPI.Infrastructure.Persistence;
 using Microsoft.Azure.Cosmos;
+using Microsoft.Extensions.Logging;
 
 namespace LabAPI.Infrastructure.Repositories;
 
-internal class WorkerRepository(CosmosClient cosmosClient) 
-	: GenericRepository<Worker>(cosmosClient), IWorkerRepository 
+internal class WorkerRepository(CosmosClient cosmosClient, ILogger<WorkerRepository> logger) 
+	: GenericRepository<Worker>(cosmosClient, logger), IWorkerRepository 
 {
 	public async Task CreateAsync(Worker entity)
 	{

@@ -1,11 +1,12 @@
 using LabAPI.Application.Features.Tests.Repository;
 using LabAPI.Domain.Entities;
 using Microsoft.Azure.Cosmos;
+using Microsoft.Extensions.Logging;
 
 namespace LabAPI.Infrastructure.Repositories;
 
-internal sealed class TestRepository(CosmosClient cosmosClient) 
-	: GenericRepository<Test>(cosmosClient), ITestRepository
+internal sealed class TestRepository(CosmosClient cosmosClient, ILogger<TestRepository> logger) 
+	: GenericRepository<Test>(cosmosClient, logger), ITestRepository
 {
 	public async Task CreateAsync(Test entity)
 	{
