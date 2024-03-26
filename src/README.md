@@ -16,7 +16,7 @@
   -e EMAIL_ADDRESS="" \
   -e EMAIL_PASSWORD="" \
   -e EMAIL_SMTP="" \
-  -e FRONTEND_CORS=""
+  -e FRONTEND_URL=""
   labapi .
 ```
 4. In the empty strings, you need to provide the connection strings and email information. The connection strings are for Azure Cosmos DB and Azure File Share. The email information is for the account that will be used to send emails. While the email information is optional, the connection strings are mandatory. The connection strings are used to establish connections to the Azure services. The email information is used to send emails to users.
