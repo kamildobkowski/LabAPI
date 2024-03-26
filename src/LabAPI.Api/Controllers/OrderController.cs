@@ -13,7 +13,7 @@ namespace LabAPI.Api.Controllers;
 [Route("api/order")]
 [Authorize]
 [Authorize(Policy = "IsLabWorker")]
-public sealed class OrderController(IMediator mediator, Logger<OrderController> logger) 
+public sealed class OrderController(IMediator mediator, ILogger<OrderController> logger) 
 	: ControllerBase
 {
 	[HttpPost]

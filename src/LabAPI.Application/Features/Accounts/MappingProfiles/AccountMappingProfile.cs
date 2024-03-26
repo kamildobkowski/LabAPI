@@ -12,6 +12,6 @@ public sealed class AccountMappingProfile : Profile
 		CreateMap<RegisterCustomerDto, Customer>()
 			.ForMember(r => r.Role, s=>s.MapFrom(c=>UserRole.Customer));
 		CreateMap<RegisterWorkerDto, Worker>()
-			.ForMember(r => r.Role, s => s.MapFrom(c => Enum.Parse<UserRole>(c.UserRole)));
+			.ForMember(r => r.Role, s => s.MapFrom(c => Enum.Parse<UserRole>(c.UserRole, true)));
 	}
 }
