@@ -3,9 +3,27 @@ using LabAPI.Api.Middlewares;
 using LabAPI.Application.Common.Extensions;
 using LabAPI.Infrastructure.Extensions;
 using Microsoft.OpenApi.Models;
+using Serilog;
+using Serilog.Events;
 
 var builder = WebApplication.CreateBuilder(args);
 
+var logger = Log.Logger = new LoggerConfiguration()
+    .WriteTo.AzureBlobStorage(
+        connectionString: Environment.GetEnvironmentVariable("AZUREFILESHARE_CONNECTIONSTRING"),
+        storageContainerName: "logs",
+        storageFileName: $"log-{DateTime.UtcNow:yyyyMMdd}.txt",
+        outputTemplate: "{Timestamp:yyyy-MM-dd HH:mm:ss.fff zzz} [{Level:u3}] {Message:lj}{NewLine}{Exception}",
+        restrictedToMinimumLevel: LogEventLevel.Information,
+        batchPostingLimit: 50,
+        period: TimeSpan.FromSeconds(2),
+        formatProvider: null,
+        writeInBatches: true)
+    .CreateLogger();
+
+logger.Write(LogEventLevel.Information, "Application started");
+
+builder.Services.AddSerilog();
 
 builder.Services.AddApplication();
 builder.Services.AddInfrastructure(builder.Configuration);

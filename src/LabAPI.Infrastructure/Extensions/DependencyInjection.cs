@@ -27,15 +27,16 @@ public static class DependencyInjection
 		var fontStream = File.OpenRead("wwwroot/fonts/Arial.ttf");
 		FontManager.RegisterFontWithCustomName("ArialLocal", fontStream);
 		QuestPDF.Settings.License = LicenseType.Community;
-		services.AddRepositories(configuration);
+		services.AddRepositories();
 		services.AddJwtAuthentication(configuration);
-		services.AddCustomAuthorization(configuration);
-		services.AddSingleton<IPdfFileRepository, PdfFileRepository>();
+		services.AddCustomAuthorization();
+		services.AddScoped<IPasswordHasher<User>, PasswordHasher<User>>();
+		
 		services.AddScoped<IPdfService, PdfService>();
 		services.AddTransient<IEmailService, EmailService>();
 	}
 
-	private static void AddRepositories(this IServiceCollection services, IConfiguration configuration)
+	private static void AddRepositories(this IServiceCollection services)
 	{
 		var cosmosClient =
 			new CosmosClientBuilder(Environment.GetEnvironmentVariable("AZURECOSMOSDB_CONNECTIONSTRING"))
@@ -45,7 +46,8 @@ public static class DependencyInjection
 		services.AddScoped<ITestRepository, TestRepository>();
 		services.AddScoped<ICustomerRepository, CustomerRepository>();
 		services.AddScoped<IWorkerRepository, WorkerRepository>();
-		services.AddScoped<IPasswordHasher<User>, PasswordHasher<User>>();
+		services.AddSingleton<IPdfFileRepository, PdfFileRepository>();
+		
 	}
 
 	private static void AddJwtAuthentication(this IServiceCollection services, IConfiguration configuration)
@@ -73,7 +75,7 @@ public static class DependencyInjection
 		services.AddSingleton(authenticationSettings);
 	}
 
-	private static void AddCustomAuthorization(this IServiceCollection services, IConfiguration configuration)
+	private static void AddCustomAuthorization(this IServiceCollection services)
 	{
 		services.AddScoped<IAuthorizationHandler, IsLabWorkerRequirementHandler>();
 		services.AddAuthorizationBuilder()
