@@ -79,10 +79,8 @@ if (app.Environment.IsDevelopment())
 {
     app.UseSwaggerUI();
 }
-else
-{
-    app.UseMiddleware<ErrorHandlingMiddleware>();
-}
+
+app.UseMiddleware<ErrorHandlingMiddleware>();
 
 app.UseCors("Frontend");
 

@@ -2,6 +2,7 @@ using LabAPI.Application.Features.Accounts.Commands;
 using LabAPI.Application.Features.Accounts.Dtos;
 using LabAPI.Application.Features.Accounts.Queries;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LabAPI.Api.Controllers;
@@ -11,6 +12,7 @@ namespace LabAPI.Api.Controllers;
 public sealed class WorkerAccountController(IMediator mediator, ILogger<WorkerAccountController> logger) 
 	: ControllerBase
 {
+	[Authorize(Roles="Admin")]
 	[HttpPost("register")]
 	public async Task<ActionResult> Register([FromBody] RegisterWorkerDto dto)
 	{
