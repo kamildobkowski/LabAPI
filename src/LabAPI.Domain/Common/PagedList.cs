@@ -2,7 +2,7 @@ using System.Collections;
 
 namespace LabAPI.Domain.Common;
 
-public class PagedList<T> : IEnumerable<T>
+public class PagedList<T>
 {
 	public List<T> List { get; set; }
 	public int Page { get; set; }
@@ -19,14 +19,5 @@ public class PagedList<T> : IEnumerable<T>
 		Count = count;
 		HasNext = page * pageSize < count;
 		HasPrevious = page > 1;
-	}
-	public IEnumerator<T> GetEnumerator()
-	{
-		return List.GetEnumerator();
-	}
-
-	IEnumerator IEnumerable.GetEnumerator()
-	{
-		return GetEnumerator();
 	}
 }
