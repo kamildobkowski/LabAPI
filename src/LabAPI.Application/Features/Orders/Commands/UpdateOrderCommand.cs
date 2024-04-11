@@ -1,7 +1,7 @@
 using AutoMapper;
 using LabAPI.Application.Features.Orders.Dtos;
-using LabAPI.Application.Features.Orders.Repository;
 using LabAPI.Domain.Entities;
+using LabAPI.Domain.Repositories;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 

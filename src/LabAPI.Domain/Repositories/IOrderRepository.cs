@@ -1,7 +1,7 @@
 using LabAPI.Application.Common.Interfaces;
 using LabAPI.Domain.Entities;
 
-namespace LabAPI.Application.Features.Orders.Repository;
+namespace LabAPI.Domain.Repositories;
 
 public interface IOrderRepository : IRepository<Order>, IPagination<Order>
 {

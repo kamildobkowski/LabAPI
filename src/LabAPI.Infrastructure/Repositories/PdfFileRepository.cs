@@ -3,6 +3,7 @@ using Azure.Storage.Files.Shares;
 using Azure.Storage.Files.Shares.Models;
 using LabAPI.Application.Common.Interfaces;
 using LabAPI.Domain.Exceptions;
+using LabAPI.Domain.Repositories;
 using Microsoft.Extensions.Logging;
 
 namespace LabAPI.Infrastructure.Repositories;

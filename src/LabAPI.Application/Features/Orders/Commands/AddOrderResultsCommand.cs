@@ -1,7 +1,6 @@
 using LabAPI.Application.Common.Interfaces;
 using LabAPI.Application.Features.Orders.Dtos;
-using LabAPI.Application.Features.Orders.Repository;
-using LabAPI.Application.Features.Tests.Repository;
+using LabAPI.Domain.Repositories;
 using LabAPI.Domain.ValueObjects;
 using MediatR;
 

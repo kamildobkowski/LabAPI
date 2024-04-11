@@ -131,6 +131,9 @@
             "projectReferences": {
               "/Users/kamil/Documents/LabAPI/src/LabAPI.Domain/LabAPI.Domain.csproj": {
                 "projectPath": "/Users/kamil/Documents/LabAPI/src/LabAPI.Domain/LabAPI.Domain.csproj"
+              },
+              "/Users/kamil/Documents/LabAPI/src/LabAPI.Infrastructure/LabAPI.Infrastructure.csproj": {
+                "projectPath": "/Users/kamil/Documents/LabAPI/src/LabAPI.Infrastructure/LabAPI.Infrastructure.csproj"
               }
             }
           }
@@ -265,8 +268,8 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "/Users/kamil/Documents/LabAPI/src/LabAPI.Application/LabAPI.Application.csproj": {
-                "projectPath": "/Users/kamil/Documents/LabAPI/src/LabAPI.Application/LabAPI.Application.csproj"
+              "/Users/kamil/Documents/LabAPI/src/LabAPI.Domain/LabAPI.Domain.csproj": {
+                "projectPath": "/Users/kamil/Documents/LabAPI/src/LabAPI.Domain/LabAPI.Domain.csproj"
               }
             }
           }

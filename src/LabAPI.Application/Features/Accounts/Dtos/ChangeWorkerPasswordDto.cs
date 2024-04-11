@@ -1,6 +1,6 @@
 using FluentValidation;
-using LabAPI.Application.Features.Accounts.Repository;
 using LabAPI.Domain.Entities;
+using LabAPI.Domain.Repositories;
 using Microsoft.AspNetCore.Identity;
 
 namespace LabAPI.Application.Features.Accounts.Dtos;

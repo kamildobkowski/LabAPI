@@ -1,5 +1,5 @@
-using LabAPI.Application.Features.Tests.Repository;
 using LabAPI.Domain.Exceptions;
+using LabAPI.Domain.Repositories;
 using MediatR;
 
 namespace LabAPI.Application.Features.Tests.Commands;

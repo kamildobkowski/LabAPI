@@ -1,4 +1,4 @@
-namespace LabAPI.Application.Common.Interfaces;
+namespace LabAPI.Domain.Repositories;
 
 public interface IPdfFileRepository
 {

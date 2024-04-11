@@ -1,9 +1,9 @@
 using LabAPI.Application.Common.Interfaces;
-using LabAPI.Application.Features.Accounts.Repository;
-using LabAPI.Application.Features.Orders.Repository;
 using LabAPI.Domain.Entities;
 using LabAPI.Domain.Enums;
+using LabAPI.Domain.Repositories;
 using LabAPI.Domain.ValueObjects;
+using LabAPI.Infrastructure.Repositories;
 using LabAPI.Infrastructure.Services.Pdf.OrderResults;
 using Microsoft.Extensions.Logging;
 using QuestPDF.Fluent;

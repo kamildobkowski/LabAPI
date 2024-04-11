@@ -1,9 +1,7 @@
 using System.Text;
 using LabAPI.Application.Common.Interfaces;
-using LabAPI.Application.Features.Accounts.Repository;
-using LabAPI.Application.Features.Orders.Repository;
-using LabAPI.Application.Features.Tests.Repository;
 using LabAPI.Domain.Entities;
+using LabAPI.Domain.Repositories;
 using LabAPI.Infrastructure.Authentication;
 using LabAPI.Infrastructure.Authorization.Policies;
 using LabAPI.Infrastructure.Repositories;

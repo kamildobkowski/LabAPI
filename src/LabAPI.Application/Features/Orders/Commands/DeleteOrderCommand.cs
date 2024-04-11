@@ -1,5 +1,5 @@
-using LabAPI.Application.Features.Orders.Repository;
 using LabAPI.Domain.Exceptions;
+using LabAPI.Domain.Repositories;
 using MediatR;
 
 namespace LabAPI.Application.Features.Orders.Commands;

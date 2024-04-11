@@ -1,7 +1,7 @@
 using LabAPI.Application.Features.Accounts.Dtos;
-using LabAPI.Application.Features.Accounts.Repository;
 using LabAPI.Domain.Entities;
 using LabAPI.Domain.Exceptions;
+using LabAPI.Domain.Repositories;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
 

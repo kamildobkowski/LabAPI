@@ -1,6 +1,6 @@
 using AutoMapper;
 using LabAPI.Application.Features.Orders.Dtos;
-using LabAPI.Application.Features.Orders.Repository;
+using LabAPI.Domain.Repositories;
 using MediatR;
 
 namespace LabAPI.Application.Features.Orders.Queries;

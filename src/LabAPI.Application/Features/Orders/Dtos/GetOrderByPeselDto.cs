@@ -1,5 +1,5 @@
 using FluentValidation;
-using LabAPI.Application.Features.Orders.Repository;
+using LabAPI.Domain.Repositories;
 
 namespace LabAPI.Application.Features.Orders.Dtos;
 
