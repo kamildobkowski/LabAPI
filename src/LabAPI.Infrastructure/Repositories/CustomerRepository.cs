@@ -1,6 +1,5 @@
 using LabAPI.Domain.Entities;
 using LabAPI.Domain.Repositories;
-using LabAPI.Infrastructure.Persistence;
 using Microsoft.Azure.Cosmos;
 using Microsoft.Extensions.Logging;
 

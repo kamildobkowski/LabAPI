@@ -3,7 +3,6 @@ using System.Linq.Expressions;
 using LabAPI.Application.Common.Interfaces;
 using LabAPI.Domain.Common;
 using LabAPI.Domain.Exceptions;
-using LabAPI.Infrastructure.Persistence;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Azure.Cosmos;
 using Microsoft.Azure.Cosmos.Linq;

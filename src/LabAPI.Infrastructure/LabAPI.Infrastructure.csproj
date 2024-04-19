@@ -22,4 +22,8 @@
     <PackageReference Include="RazorEngine.NetCore" Version="3.1.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Persistence\" />
+  </ItemGroup>
+
 </Project>
