@@ -16,4 +16,17 @@ public sealed class Test : BaseEntity
 		ShortName = shortName ?? name;
 		Id = ShortName.EncodePolishLetterAndWhiteChars();
 	}
+	
+	public bool FilterByNameAndShortName(string? filter)
+	{
+		if (filter is null or "") return true;
+		var fullTestName = ShortName.ToLower() + ' ' + Name.ToLower();
+		var splitFilter = filter.Split(' ');
+		foreach (var s in splitFilter)
+		{
+			if (fullTestName.Contains(s.ToLower()))
+				return true;
+		}
+		return false;
+	}
 }

@@ -1,4 +1,4 @@
-using LabAPI.Application.Common.Interfaces;
+using LabAPI.Domain.Common;
 using LabAPI.Domain.Entities;
 
 namespace LabAPI.Domain.Repositories;

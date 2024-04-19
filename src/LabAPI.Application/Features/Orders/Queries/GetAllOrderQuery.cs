@@ -15,9 +15,9 @@ internal sealed class GetAllOrderQueryHandler (IOrderRepository repository, IMap
 {
 	public async Task<PagedList<OrderDto>> Handle(GetAllOrderQuery request, CancellationToken cancellationToken)
 	{
-		var list = await repository.GetPageAsync(request.Page, request.PageSize, request.FilterBy,
+		var list = await repository.GetPageAsync(request.Page, request.PageSize,
 			request.Filter, request.OrderBy, request.Asc);
-		var dtos = new PagedList<OrderDto>(mapper.Map<List<OrderDto>>(list.List), list.Page, list.PageSize, list.Count);
+		var dtos = new PagedList<OrderDto>(mapper.Map<List<OrderDto>>(list.List), list.Page, list.PageSize, list.Count, list.AllItemsCount);
 		return dtos;
 	}
 }

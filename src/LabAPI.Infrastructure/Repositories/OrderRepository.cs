@@ -1,3 +1,4 @@
+using LabAPI.Domain.Common;
 using LabAPI.Domain.Entities;
 using LabAPI.Domain.Repositories;
 using LabAPI.Infrastructure.Persistence;
@@ -43,5 +44,15 @@ internal sealed class OrderRepository(CosmosClient cosmosClient, ILogger<OrderRe
 	public async Task DeleteAsync(Order entity)
 	{
 		await base.DeleteAsync(entity, entity.OrderNumber);
+	}
+
+	public async Task<PagedList<Order>> GetPageAsync(int page, int pageSize, string? filter, string? orderBy, bool sortOrder)
+	{
+		return await base.GetPageAsync(page, pageSize, 
+			r => 
+				filter==null ||
+				r.OrderNumber==filter ||
+				r.PatientData.Surname.Contains(filter), 
+			orderBy, sortOrder);
 	}
 }

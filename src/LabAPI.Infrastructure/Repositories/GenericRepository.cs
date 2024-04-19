@@ -12,8 +12,7 @@ using Microsoft.Extensions.Logging;
 
 namespace LabAPI.Infrastructure.Repositories;
 
-public abstract class GenericRepository<T> (CosmosClient cosmosClient, ILogger<GenericRepository<T>> logger) 
-	: IPagination<T> where T : BaseEntity
+public abstract class GenericRepository<T>(CosmosClient cosmosClient, ILogger<GenericRepository<T>> logger) where T : BaseEntity
 {
 
 	private readonly Container _container = cosmosClient.GetContainer("LabApi", typeof(T).Name + "s");
@@ -87,7 +86,7 @@ public abstract class GenericRepository<T> (CosmosClient cosmosClient, ILogger<G
 	
 	protected virtual IQueryable<T> PaginationQuery(int page, int pageSize, Expression<Func<T, object>> orderBy,
 		Expression<Func<T, bool>> filter, bool asc = true)
-		=> !asc
+		=> asc
 			? _container.GetItemLinqQueryable<T>()
 				.Where(filter)
 				.OrderBy(orderBy)
@@ -99,7 +98,7 @@ public abstract class GenericRepository<T> (CosmosClient cosmosClient, ILogger<G
 				.Skip((page - 1) * pageSize)
 				.Take(pageSize);
 
-	protected virtual IQueryable<T> PaginationQuery(int page, int pageSize, string? filterBy, string? filter,
+	protected virtual IQueryable<T> PaginationQuery(int page, int pageSize, Expression<Func<T, bool>> filterByLambda,
 		string? orderBy, bool sortOrder = true)
 	{
 		Expression<Func<T, object>> orderByLambda;
@@ -123,37 +122,15 @@ public abstract class GenericRepository<T> (CosmosClient cosmosClient, ILogger<G
 			}
 		}
 
-		Expression<Func<T, bool>> filterLambda;
-		if (string.IsNullOrEmpty(filterBy) || string.IsNullOrEmpty(filter))
-			filterLambda = (entity) => true;
-		else
-		{
-			var filterProperty = typeof(T).GetProperty(filterBy);
-			if (filterProperty is null)
-			{
-				filterLambda = entity => true;
-			}
-			else
-			{
-				var parameter = Expression.Parameter(typeof(T));
-				var propertyAccess = Expression.Property(parameter, filterProperty);
-				var valueExpression = Expression.Constant(filter.ToLower());
-				var toLowerMethod = typeof(string).GetMethod("ToLower", System.Type.EmptyTypes);
-				var propertyToLower = Expression.Call(propertyAccess, toLowerMethod!);
-				var containsMethod = typeof(string).GetMethod("Contains", new[] { typeof(string) });
-				var containsExpression = Expression.Call(propertyToLower, containsMethod!, valueExpression);
-				filterLambda = Expression.Lambda<Func<T, bool>>(containsExpression, parameter);
-			}
-		}
-
 		return PaginationQuery
-			(page, pageSize, orderByLambda, filterLambda, sortOrder);
+			(page, pageSize, orderByLambda, filterByLambda, sortOrder);
 	}
-	public async Task<PagedList<T>> GetPageAsync(int page, int pageSize, string? filterBy, string? filter, string? orderBy ,bool sortOrder = true)
+	public async Task<PagedList<T>> GetPageAsync(int page, int pageSize, Expression<Func<T, bool>> filterByLambda, string? orderBy ,bool sortOrder = true)
 	{
+		var allItemsCount = _container.GetItemLinqQueryable<T>().Count();
 		try
 		{
-			using var q = PaginationQuery(page, pageSize, filterBy, filter, orderBy, sortOrder).ToFeedIterator();
+			using var q = PaginationQuery(page, pageSize, filterByLambda, orderBy, sortOrder).ToFeedIterator();
 			{
 				var list = new List<T>();
 				while (q.HasMoreResults)
@@ -162,7 +139,7 @@ public abstract class GenericRepository<T> (CosmosClient cosmosClient, ILogger<G
 				}
 
 				logger.LogInformation($"Get Page of {nameof(T)}");
-				return new PagedList<T>(list, page, pageSize, list.Count);
+				return new PagedList<T>(list, page, pageSize, list.Count, allItemsCount);
 			}
 		}
 		catch (Exception e)

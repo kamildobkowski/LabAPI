@@ -48,11 +48,11 @@ public class TestController(IMediator mediator, ILogger<TestController> logger) 
 
 	[HttpGet]
 	public async Task<ActionResult<PagedList<TestDto>>> GetAll([FromQuery] int page = 1, [FromQuery] int pageSize = 20,
-		[FromQuery] string? filterBy = null, [FromQuery] string? filter = null, [FromQuery] string? orderBy = null, 
+		[FromQuery] string? filter = null, [FromQuery] string? orderBy = null, 
 		[FromQuery] bool asc = true)
 	{
 		logger.LogInformation("Get Tests Page endpoint invoked");
-		var pagedList = await mediator.Send(new GetAllTestsQuery(page, pageSize, filterBy, filter, orderBy, asc));
+		var pagedList = await mediator.Send(new GetAllTestsQuery(page, pageSize, filter, orderBy, asc));
 		return Ok(pagedList);
 	}
 }
