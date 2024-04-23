@@ -18,12 +18,14 @@ public sealed class OrderMappingProfile : Profile
 			.ForMember(r => r.Results, c =>
 				c.MapFrom(s =>
 					s.Tests.ToDictionary<string?, string, Dictionary<string, string>?>(i => i, i => null)));
-		
+
 		CreateMap<Order, OrderDto>()
 			.ForMember(r => r.Sex, c => c.MapFrom(s => s.PatientData.Sex))
 			.ForMember(r => r.DateOfBirth, c => c.MapFrom(s => s.PatientData.DateOfBirth))
 			.ForMember(r => r.Pesel, c => c.MapFrom(s => s.PatientData.Pesel))
-			.ForMember(r => r.Address, c => c.MapFrom(s => s.PatientData.Address));
+			.ForMember(r => r.Address, c => c.MapFrom(s => s.PatientData.Address))
+			.ForMember(r => r.FullName, c => c.MapFrom(s => $"{s.PatientData.Name} {s.PatientData.Surname}"))
+			.ForMember(r => r.Status, c => c.MapFrom(s => s.Status.ToString()));
 		
 		CreateMap<UpdateOrderDto, Order>()
 			.ForMember(r => r.PatientData,
