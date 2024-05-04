@@ -19,6 +19,7 @@ internal sealed class ChangeWorkerPasswordCommandHandler (IWorkerRepository work
 		if (entity is null)
 			throw new NotFoundException();
 		entity.PasswordHash = passwordHasher.HashPassword(entity, request.Dto.NewPassword);
-		await workerRepository.UpdateAsync(entity);
+		workerRepository.UpdateAsync(entity);
+		await workerRepository.SaveChangesAsync();
 	}
 } 

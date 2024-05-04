@@ -3,6 +3,8 @@ using System.Linq.Expressions;
 using LabAPI.Application.Common.Interfaces;
 using LabAPI.Domain.Common;
 using LabAPI.Domain.Exceptions;
+using LabAPI.Infrastructure.Persistence;
+using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Azure.Cosmos;
 using Microsoft.Azure.Cosmos.Linq;
@@ -11,14 +13,23 @@ using Microsoft.Extensions.Logging;
 
 namespace LabAPI.Infrastructure.Repositories;
 
-public abstract class GenericRepository<T>(CosmosClient cosmosClient, ILogger<GenericRepository<T>> logger) where T : BaseEntity
+public abstract class GenericRepository<T>(CosmosClient cosmosClient, ILogger<GenericRepository<T>> logger, 
+	IMediator mediator, LabDbContext dbContext) where T : Entity
 {
 
 	private readonly Container _container = cosmosClient.GetContainer("LabApi", typeof(T).Name + "s");
-	public virtual async Task<T?> GetAsync(Expression<Func<T, bool>> lambda) 
+	// public virtual async Task<T?> GetAsync(Expression<Func<T, bool>> lambda) 
+	// {
+	// 	using var q = _container.GetItemLinqQueryable<T>().Where(lambda).ToFeedIterator();
+	// 	return (await q.ReadNextAsync()).Resource.FirstOrDefault();
+	// }
+
+	public virtual async Task<T?> GetAsync(Expression<Func<T, bool>> lambda)
 	{
 		using var q = _container.GetItemLinqQueryable<T>().Where(lambda).ToFeedIterator();
-		return (await q.ReadNextAsync()).Resource.FirstOrDefault();
+		var entity = (await q.ReadNextAsync()).Resource.FirstOrDefault();
+		AddTracking(entity);
+		return entity;
 	}
 
 	public virtual async Task<List<T>> GetAllAsync(Expression<Func<T, bool>> lambda = default!)
@@ -34,54 +45,19 @@ public abstract class GenericRepository<T>(CosmosClient cosmosClient, ILogger<Ge
 		}
 	}
 
-	public virtual async Task CreateAsync(T entity, string? partitionKey = null)
+	public virtual void CreateAsync(T entity)
+		=> dbContext.Set<T>().Add(entity);
+
+	public virtual void UpdateAsync(T entity)
 	{
-		try
-		{
-			await _container.CreateItemAsync(entity);
-			logger.LogInformation($"Created entity {nameof(T)}");
-		}
-		catch (CosmosException e) when (e.StatusCode == System.Net.HttpStatusCode.Conflict)
-		{
-			logger.LogError(e.Message, e);
-			throw new BadHttpRequestException("Entity already exists");
-		}
-		catch(CosmosException e)
-		{
-			logger.LogError(e.Message, e);
-			throw new BadHttpRequestException("Error while creating entity");
-		}
-		
+		entity.ModifiedAt=DateTime.UtcNow;
+		dbContext.Set<T>().Update(entity);
+		logger.LogInformation($"Updated entity {nameof(T)} with id {entity.Id}");
 	}
+
+	public virtual void DeleteAsync(T entity)
+		=> dbContext.Set<T>().Remove(entity);
 	
-
-
-	public virtual async Task UpdateAsync(T entity, string? partitionKey = null)
-	{
-		try
-		{
-			entity.ModifiedAt=DateTime.UtcNow;
-			var i = await _container.UpsertItemAsync(entity);
-			logger.LogInformation($"Updated entity {nameof(T)} with id {entity.Id}");
-		}
-		catch(CosmosException e)
-		{
-			logger.LogError(e.Message, e);
-			throw new BadHttpRequestException("Error while updating entity");
-		}
-	}
-
-	public virtual Task DeleteAsync(T entity, string partitionKey)
-	{
-		try
-		{
-			return _container.DeleteItemAsync<T>(entity.Id, new PartitionKey(partitionKey));
-		}
-		catch (CosmosException e) when (e.StatusCode == System.Net.HttpStatusCode.NotFound)
-		{
-			throw new NotFoundException(e.Message);
-		}
-	}
 	
 	protected virtual IQueryable<T> PaginationQuery(int page, int pageSize, Expression<Func<T, object>> orderBy,
 		Expression<Func<T, bool>> filter, bool asc = true)
@@ -136,7 +112,7 @@ public abstract class GenericRepository<T>(CosmosClient cosmosClient, ILogger<Ge
 				{
 					list.AddRange(await q.ReadNextAsync());
 				}
-
+				AddTracking(list);
 				logger.LogInformation($"Get Page of {nameof(T)}");
 				return new PagedList<T>(list, page, pageSize, list.Count, allItemsCount);
 			}
@@ -146,7 +122,28 @@ public abstract class GenericRepository<T>(CosmosClient cosmosClient, ILogger<Ge
 			logger.LogError("e.Message", [e]);
 			throw new BadHttpRequestException("Error while getting page");
 		}
-		
-		
+	}
+
+	public Task SaveChangesAsync()
+		=> dbContext.SaveChangesAsync();
+	
+
+	private void AddTracking(T? entity)
+	{
+		if (entity is null)
+			return;
+		var entry = dbContext.Entry(entity);
+		if (entry.State == EntityState.Detached)
+			dbContext.Set<T>().Attach(entity);
+	}
+
+	private void AddTracking(IEnumerable<T> entities)
+	{
+		foreach (var i in entities)
+		{
+			var entry = dbContext.Entry(i);
+			if(entry.State == EntityState.Detached)
+				dbContext.Set<T>().Attach(i);
+		}
 	}
 }

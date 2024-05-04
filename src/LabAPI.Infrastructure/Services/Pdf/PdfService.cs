@@ -21,7 +21,8 @@ public sealed class PdfService(IPdfFileRepository pdfFileRepository, IOrderRepos
 			var document = doc.GeneratePdf();
 			await pdfFileRepository.UploadFile(document, $"Order_{model.OrderNumber}.pdf");
 			order.Status = OrderStatus.PdfReady;
-			await orderRepository.UpdateAsync(order);
+			orderRepository.UpdateAsync(order);
+			await orderRepository.SaveChangesAsync();
 		
 			var customer = await customerRepository.GetAsync(r => r.Pesel == order.PatientData.Pesel);
 			if (customer is not null)

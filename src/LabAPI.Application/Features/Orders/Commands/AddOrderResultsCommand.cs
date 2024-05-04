@@ -44,6 +44,7 @@ internal sealed class AddOrderResultsCommandHandler(IOrderRepository repository,
 			}
 			_ = pdfService.CreateOrderPdf(entity, model);
 		}
-		await repository.UpdateAsync(entity);
+		repository.UpdateAsync(entity);
+		await repository.SaveChangesAsync();
 	}
 } 

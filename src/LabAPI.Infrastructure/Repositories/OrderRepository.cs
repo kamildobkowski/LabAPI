@@ -1,6 +1,8 @@
 using LabAPI.Domain.Common;
 using LabAPI.Domain.Entities;
 using LabAPI.Domain.Repositories;
+using LabAPI.Infrastructure.Persistence;
+using MediatR;
 using Microsoft.Azure.Cosmos;
 using Microsoft.Azure.Cosmos.Linq;
 using Microsoft.EntityFrameworkCore;
@@ -8,8 +10,9 @@ using Microsoft.Extensions.Logging;
 
 namespace LabAPI.Infrastructure.Repositories;
 
-internal sealed class OrderRepository(CosmosClient cosmosClient, ILogger<OrderRepository> logger) 
-	:  GenericRepository<Order>(cosmosClient, logger), IOrderRepository
+internal sealed class OrderRepository(CosmosClient cosmosClient, ILogger<OrderRepository> logger,
+	IMediator mediator, LabDbContext dbContext) 
+	:  GenericRepository<Order>(cosmosClient, logger, mediator, dbContext), IOrderRepository
 {
 	private readonly Container _container = cosmosClient.GetContainer("LabApi", nameof(Order) + "s");
 
@@ -26,23 +29,8 @@ internal sealed class OrderRepository(CosmosClient cosmosClient, ILogger<OrderRe
 			s = (int.Parse(latestOrder.OrderNumber)+1).ToString();
 		entity.OrderNumber = s;
 		entity.Id = s;
-		await CreateAsync(entity);
+		CreateAsync(entity);
 		return s;
-	}
-
-	public async Task CreateAsync(Order entity)
-	{
-		await base.CreateAsync(entity, entity.OrderNumber);
-	}
-
-	public async Task UpdateAsync(Order entity)
-	{
-		await base.UpdateAsync(entity, entity.OrderNumber);
-	}
-
-	public async Task DeleteAsync(Order entity)
-	{
-		await base.DeleteAsync(entity, entity.OrderNumber);
 	}
 
 	public async Task<PagedList<Order>> GetPageAsync(int page, int pageSize, string? filter, string? orderBy, bool sortOrder)

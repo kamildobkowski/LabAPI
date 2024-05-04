@@ -1,9 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "u3nW612mI/t3MNkn0ppLMlkrmUDfkenwGWeTXORHexM5gr+TZKKMoj+dKRH73p4ExV4E6NUylF7APgKki2wbzw==",
+  "dgSpecHash": "5IjZYrSDQ4aZyl7VSNi/jexanca+Q7yYneRCKatMFNQw+2kyZzBitFE1Uhz456fnQFt4PG1AF/7thGcPEA9q0Q==",
   "success": true,
   "projectFilePath": "/Users/kamil/Documents/LabAPI/src/LabAPI.Domain/LabAPI.Domain.csproj",
   "expectedPackageFiles": [
+    "/Users/kamil/.nuget/packages/mediatr/12.2.0/mediatr.12.2.0.nupkg.sha512",
+    "/Users/kamil/.nuget/packages/mediatr.contracts/2.0.1/mediatr.contracts.2.0.1.nupkg.sha512",
+    "/Users/kamil/.nuget/packages/microsoft.extensions.dependencyinjection.abstractions/8.0.0/microsoft.extensions.dependencyinjection.abstractions.8.0.0.nupkg.sha512",
     "/Users/kamil/.nuget/packages/newtonsoft.json/13.0.3/newtonsoft.json.13.0.3.nupkg.sha512"
   ],
   "logs": []

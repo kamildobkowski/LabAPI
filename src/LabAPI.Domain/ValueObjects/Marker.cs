@@ -2,16 +2,25 @@ using LabAPI.Domain.Common;
 
 namespace LabAPI.Domain.ValueObjects;
 
-public sealed class Marker(
-	string name,
-	decimal? lowerNorm = null,
-	decimal? higherNorm = null,
-	string? unit = null,
-	string? shortName = null) : BaseEntity
+public sealed class Marker : Entity
 {
-	public string ShortName { get; set; } = shortName ?? name;
-	public string Name { get; set; } = name;
-	public decimal? LowerNorm { get; set; } = lowerNorm;
-	public decimal? HigherNorm { get; set; } = higherNorm;
-	public string? Unit { get; set; } = unit;
+	public Marker() { }
+	public Marker(string name,
+		decimal? lowerNorm = null,
+		decimal? higherNorm = null,
+		string? unit = null,
+		string? shortName = null)
+	{
+		ShortName = shortName ?? name;
+		Name = name;
+		LowerNorm = lowerNorm;
+		HigherNorm = higherNorm;
+		Unit = unit;
+	}
+
+	public string ShortName { get; set; } = null!;
+	public string Name { get; set; } = null!;
+	public decimal? LowerNorm { get; set; }
+	public decimal? HigherNorm { get; set; }
+	public string? Unit { get; set; }
 }

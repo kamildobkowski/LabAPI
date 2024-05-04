@@ -19,6 +19,7 @@ internal sealed class ChangeCustomerPasswordCommandHandler(ICustomerRepository r
 		if (entity is null)
 			throw new UnauthorizedException();
 		entity.PasswordHash = passwordHasher.HashPassword(entity, request.Dto.NewPassword);
-		await repository.UpdateAsync(entity);
+		repository.UpdateAsync(entity);
+		await repository.SaveChangesAsync();
 	}
 } 

@@ -4,7 +4,7 @@ using LabAPI.Domain.ValueObjects;
 
 namespace LabAPI.Domain.Entities;
 
-public sealed class Order : BaseEntity
+public sealed class Order : Entity
 {
 	public string OrderNumber { get; set; } = string.Empty;
 	public PatientData PatientData { get; set; } = null!;

@@ -17,6 +17,7 @@ internal sealed class RegisterCustomerCommandHandler(ICustomerRepository custome
 	{
 		var entity = mapper.Map<Customer>(request.Dto);
 		entity.PasswordHash = passwordHasher.HashPassword(entity, request.Dto.Password);
-		await customerRepository.CreateAsync(entity);
+		customerRepository.CreateAsync(entity);
+		await customerRepository.SaveChangesAsync();
 	}
 } 

@@ -4,10 +4,10 @@ using LabAPI.Domain.ValueObjects;
 
 namespace LabAPI.Domain.Entities;
 
-public sealed class Test : BaseEntity
+public sealed class Test : Entity
 {
-	public string ShortName { get; set; }
-	public string Name { get; set; }
+	public string ShortName { get; set; } = null!;
+	public string Name { get; set; } = null!;
 	public List<Marker> Markers { get; set; } = [];
 
 	public Test(string name, string? shortName = null)
@@ -16,6 +16,8 @@ public sealed class Test : BaseEntity
 		ShortName = shortName ?? name;
 		Id = ShortName.EncodePolishLetterAndWhiteChars();
 	}
+
+	public Test() { }
 	
 	public bool FilterByNameAndShortName(string? filter)
 	{

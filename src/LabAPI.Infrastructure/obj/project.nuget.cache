@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "1tVcDXBXH5mYBKC+IFOrHpZ+f89VTCeejocaihPyn5xa8cDe//5IVEbSqbc/NGzWctygvCNQH/U2GRQBCy8+PA==",
+  "dgSpecHash": "2LbPJuE2eIImgpS+Te4OjgJD16/v/Eu3IPnedlYs7+0SOsV2mSEcQJPvxQrPRAA5TrP0b16GLJDPxC+DgJBvmg==",
   "success": true,
   "projectFilePath": "/Users/kamil/Documents/LabAPI/src/LabAPI.Infrastructure/LabAPI.Infrastructure.csproj",
   "expectedPackageFiles": [
@@ -13,6 +13,8 @@
     "/Users/kamil/.nuget/packages/harfbuzzsharp/7.3.0.1/harfbuzzsharp.7.3.0.1.nupkg.sha512",
     "/Users/kamil/.nuget/packages/harfbuzzsharp.nativeassets.macos/7.3.0.1/harfbuzzsharp.nativeassets.macos.7.3.0.1.nupkg.sha512",
     "/Users/kamil/.nuget/packages/harfbuzzsharp.nativeassets.win32/7.3.0.1/harfbuzzsharp.nativeassets.win32.7.3.0.1.nupkg.sha512",
+    "/Users/kamil/.nuget/packages/mediatr/12.2.0/mediatr.12.2.0.nupkg.sha512",
+    "/Users/kamil/.nuget/packages/mediatr.contracts/2.0.1/mediatr.contracts.2.0.1.nupkg.sha512",
     "/Users/kamil/.nuget/packages/microsoft.aspnetcore.authentication.jwtbearer/8.0.3/microsoft.aspnetcore.authentication.jwtbearer.8.0.3.nupkg.sha512",
     "/Users/kamil/.nuget/packages/microsoft.aspnetcore.razor.language/3.1.0/microsoft.aspnetcore.razor.language.3.1.0.nupkg.sha512",
     "/Users/kamil/.nuget/packages/microsoft.azure.cosmos/3.38.1/microsoft.azure.cosmos.3.38.1.nupkg.sha512",

@@ -4,12 +4,14 @@ using LabAPI.Domain.Entities;
 using LabAPI.Domain.Repositories;
 using LabAPI.Infrastructure.Authentication;
 using LabAPI.Infrastructure.Authorization.Policies;
+using LabAPI.Infrastructure.Persistence;
 using LabAPI.Infrastructure.Repositories;
 using LabAPI.Infrastructure.Services.Email;
 using LabAPI.Infrastructure.Services.Pdf;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Azure.Cosmos.Fluent;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
@@ -39,6 +41,7 @@ public static class DependencyInjection
 		var cosmosClient =
 			new CosmosClientBuilder(Environment.GetEnvironmentVariable("AZURECOSMOSDB_CONNECTIONSTRING"))
 				.Build();
+		services.AddDbContext<LabDbContext>();
 		services.AddSingleton(cosmosClient);
 		services.AddScoped<IOrderRepository, OrderRepository>();
 		services.AddScoped<ITestRepository, TestRepository>();
