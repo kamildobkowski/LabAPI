@@ -1,5 +1,6 @@
 using System.Configuration;
 using System.Data;
+using LabAPI.Domain.Common;
 using LabAPI.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 
@@ -11,6 +12,7 @@ public class LabDbContext : DbContext
     public DbSet<Test> Tests { get; set; }
     public DbSet<Customer> Customers { get; set; }
     public DbSet<Worker> Workers { get; set; }
+    public List<IDomainEvent> DomainEvents { get; } = [];
     
     public LabDbContext(DbContextOptions<LabDbContext> options) : base(options)
     {

@@ -1,4 +1,4 @@
-namespace LabAPI.Application.Common.Interfaces;
+namespace LabAPI.Infrastructure.Services.Email;
 
 public interface IEmailService
 {

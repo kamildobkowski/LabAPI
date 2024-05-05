@@ -2,7 +2,7 @@ using LabAPI.Domain.Common;
 
 namespace LabAPI.Domain.ValueObjects;
 
-public sealed class Marker : Entity
+public sealed class Marker
 {
 	public Marker() { }
 	public Marker(string name,

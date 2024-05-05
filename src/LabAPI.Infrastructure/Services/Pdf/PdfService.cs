@@ -3,7 +3,7 @@ using LabAPI.Domain.Entities;
 using LabAPI.Domain.Enums;
 using LabAPI.Domain.Repositories;
 using LabAPI.Domain.ValueObjects;
-using LabAPI.Infrastructure.Repositories;
+using LabAPI.Infrastructure.Services.Email;
 using LabAPI.Infrastructure.Services.Pdf.OrderResults;
 using Microsoft.Extensions.Logging;
 using QuestPDF.Fluent;
@@ -20,15 +20,6 @@ public sealed class PdfService(IPdfFileRepository pdfFileRepository, IOrderRepos
 			var doc = new OrderResultsDocument(model);
 			var document = doc.GeneratePdf();
 			await pdfFileRepository.UploadFile(document, $"Order_{model.OrderNumber}.pdf");
-			order.Status = OrderStatus.PdfReady;
-			orderRepository.UpdateAsync(order);
-			await orderRepository.SaveChangesAsync();
-		
-			var customer = await customerRepository.GetAsync(r => r.Pesel == order.PatientData.Pesel);
-			if (customer is not null)
-			{
-				_ = emailService.SendResultReadyEmail(customer.Email, customer.Name, customer.Surname);
-			}
 		}
 		catch(Exception e)
 		{

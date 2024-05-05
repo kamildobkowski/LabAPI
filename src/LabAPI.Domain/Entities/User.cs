@@ -4,7 +4,7 @@ using LabAPI.Domain.Enums;
 
 namespace LabAPI.Domain.Entities;
 
-public abstract class User : Entity
+public abstract class User : AggregateRoot
 {
 	public string Email { get; set; } = null!;
 	public string PasswordHash { get; set; } = null!;

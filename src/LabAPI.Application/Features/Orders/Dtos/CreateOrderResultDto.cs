@@ -25,7 +25,7 @@ public sealed class CreateOrderResultDtoValidator : AbstractValidator<CreateOrde
 					var test = testRepository.GetAsync(r => r.ShortName == i.Key).Result;
 					if (test is null)
 					{
-						c.AddFailure("Invalid Tests");
+						c.AddFailure("Invalid test name");
 						return;
 					}
 
@@ -34,14 +34,14 @@ public sealed class CreateOrderResultDtoValidator : AbstractValidator<CreateOrde
 					
 					if (test.Markers.Count != i.Value.Count)
 					{
-						c.AddFailure("Invalid Tests");
+						c.AddFailure("Not enough/too many markers");
 						return;
 					}
 
 					foreach (var q in test.Markers)
 					{
 						if (i.Value.ContainsKey(q.ShortName)) continue;
-						c.AddFailure("Invalid Tests");
+						c.AddFailure("Invalid marker name");
 						return;
 					}
 				}
@@ -51,13 +51,13 @@ public sealed class CreateOrderResultDtoValidator : AbstractValidator<CreateOrde
 			{
 				var order = orderRepository.GetAsync(r => r.OrderNumber == val.OrderNumber).Result;
 				if (order is null){
-					c.AddFailure("Invalid Order Number");
+					c.AddFailure("Order with given number does not exist");
 					return;
 				}
 
 				if (order.Results.Count != val.Results.Count)
 				{
-					c.AddFailure("Invalid Tests");
+					c.AddFailure("Not enough/too many results");
 					return;
 				}
 
@@ -65,7 +65,7 @@ public sealed class CreateOrderResultDtoValidator : AbstractValidator<CreateOrde
 				foreach (var i in order.Results)
 				{
 					if (val.Results.ContainsKey(i.Key)) continue;
-					c.AddFailure("Invalid Tests");
+					c.AddFailure("Names of tests do not match");
 					return;
 				}
 			});

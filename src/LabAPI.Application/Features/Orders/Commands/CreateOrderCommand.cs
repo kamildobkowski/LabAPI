@@ -15,6 +15,7 @@ internal sealed class CreateOrderCommandHandler(IOrderRepository repository, IMa
 	{
 		var entity = mapper.Map<Order>(request.Dto);
 		var id = await repository.CreateWithNewIdAsync(entity);
+		await repository.SaveChangesAsync();
 		return id;
 	}
 } 

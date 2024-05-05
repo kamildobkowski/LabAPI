@@ -4,7 +4,7 @@ using LabAPI.Domain.ValueObjects;
 
 namespace LabAPI.Domain.Entities;
 
-public sealed class Test : Entity
+public sealed class Test : AggregateRoot
 {
 	public string ShortName { get; set; } = null!;
 	public string Name { get; set; } = null!;
