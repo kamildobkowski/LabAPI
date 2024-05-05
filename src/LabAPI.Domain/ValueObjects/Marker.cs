@@ -1,4 +1,5 @@
 using LabAPI.Domain.Common;
+using LabAPI.Domain.Extensions;
 
 namespace LabAPI.Domain.ValueObjects;
 
@@ -11,7 +12,7 @@ public sealed class Marker
 		string? unit = null,
 		string? shortName = null)
 	{
-		ShortName = shortName ?? name;
+		ShortName = shortName is null or "" ? name : shortName;
 		Name = name;
 		LowerNorm = lowerNorm;
 		HigherNorm = higherNorm;
