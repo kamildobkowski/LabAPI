@@ -6,7 +6,7 @@ namespace LabAPI.Infrastructure.Extensions;
 
 internal static class MediatorExtension
 {
-    public static void DispatchDomainEvents(this IMediator mediator, LabDbContext dbContext)
+    public static async Task DispatchDomainEvents(this IMediator mediator, LabDbContext dbContext)
     {
         var domainEntities = dbContext.ChangeTracker
             .Entries<AggregateRoot>()
@@ -21,7 +21,7 @@ internal static class MediatorExtension
         
         foreach (var @event in domainEvents)
         {
-            _ = mediator.Publish(@event);
+            await mediator.Publish(@event);
         }
     }
 }

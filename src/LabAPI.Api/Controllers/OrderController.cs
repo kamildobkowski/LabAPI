@@ -84,4 +84,13 @@ public sealed class OrderController(IMediator mediator, ILogger<OrderController>
 		await mediator.Send(new AddOrderResultsCommand(dto));
 		return Ok();
 	}
+	
+	[Authorize(Policy = "IsLabManager")]
+	[HttpPatch("{orderNumber}/acceptResults")]
+	public async Task<ActionResult> AcceptOrderResults([FromRoute] string orderNumber)
+	{
+		logger.LogInformation("Accept Order endpoint invoked");
+		await mediator.Send(new AcceptOrderResultsCommand(orderNumber));
+		return Ok();
+	}
 }

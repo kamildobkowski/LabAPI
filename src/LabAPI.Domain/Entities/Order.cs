@@ -11,12 +11,21 @@ public sealed class Order : AggregateRoot
 	public PatientData PatientData { get; set; } = null!;
 	public Dictionary<string, Dictionary<string, string>?> Results { get; set; } = null!;
 	public OrderStatus Status { get; set; } = OrderStatus.Registered;
+	public string? AcceptedById { get; set; }
 	
 	public void AddResults(Dictionary<string, Dictionary<string, string>?> results)
 	{
 		Results = results;
-		if(CheckIfResultsAreReadyAndChangeStatus())
-			RaiseDomainEvent(new OrderResultsConfirmed(this));
+		CheckIfResultsAreReadyAndChangeStatus();
+	}
+	
+	public void AcceptResults(string userId)
+	{
+		if (Status != OrderStatus.ResultsReady)
+			throw new InvalidOperationException("Order is not ready for results acceptance.");
+		Status = OrderStatus.ResultsAccepted;
+		AcceptedById = userId;
+		RaiseDomainEvent(new OrderResultsConfirmed(this));
 	}
 
 	private bool CheckIfResultsAreReadyAndChangeStatus()

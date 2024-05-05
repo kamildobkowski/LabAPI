@@ -3,6 +3,7 @@ using LabAPI.Application.Common.Interfaces;
 using LabAPI.Domain.Entities;
 using LabAPI.Domain.Repositories;
 using LabAPI.Infrastructure.Authentication;
+using LabAPI.Infrastructure.Authentication.UserContext;
 using LabAPI.Infrastructure.Authorization.Policies;
 using LabAPI.Infrastructure.Persistence;
 using LabAPI.Infrastructure.Repositories;
@@ -34,6 +35,9 @@ public static class DependencyInjection
 		
 		services.AddScoped<IPdfService, PdfService>();
 		services.AddTransient<IEmailService, EmailService>();
+
+		services.AddScoped<IUserContextService, UserContextService>();
+		services.AddHttpContextAccessor();
 	}
 
 	private static void AddRepositories(this IServiceCollection services)
@@ -79,7 +83,9 @@ public static class DependencyInjection
 	private static void AddCustomAuthorization(this IServiceCollection services)
 	{
 		services.AddScoped<IAuthorizationHandler, IsLabWorkerRequirementHandler>();
+		services.AddScoped<IAuthorizationHandler, IsLabManagerRequirementHandler>();
 		services.AddAuthorizationBuilder()
-            .AddPolicy("IsLabWorker", b => b.AddRequirements(new IsLabWorkerRequirement()));
+			.AddPolicy("IsLabWorker", b => b.AddRequirements(new IsLabWorkerRequirement()))
+			.AddPolicy("IsLabManager", r => r.AddRequirements(new IsLabManagerRequirement()));
 	}
 }

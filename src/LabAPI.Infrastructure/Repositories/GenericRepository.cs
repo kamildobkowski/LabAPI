@@ -100,7 +100,7 @@ public abstract class GenericRepository<T>(CosmosClient cosmosClient, ILogger<Ge
 
 	public async Task SaveChangesAsync()
 	{
-		mediator.DispatchDomainEvents(dbContext);
+		await mediator.DispatchDomainEvents(dbContext);
 		await dbContext.SaveChangesAsync();
 	}
 }

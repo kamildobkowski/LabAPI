@@ -44,14 +44,16 @@ public class LabDbContext : DbContext
         modelBuilder
             .Entity<Customer>()
             .ToContainer("Customers")
-            .HasNoDiscriminator();
+            .HasNoDiscriminator()
+            .HasPartitionKey(r => r.Id);
         modelBuilder.Entity<Customer>()
             .Property(r => r.Id)
             .ToJsonProperty("id");
         modelBuilder
             .Entity<Worker>()
             .ToContainer("Workers")
-            .HasNoDiscriminator();
+            .HasNoDiscriminator()
+            .HasPartitionKey(r => r.Id);
         modelBuilder.Entity<Worker>()
             .Property(r => r.Id)
             .ToJsonProperty("id");

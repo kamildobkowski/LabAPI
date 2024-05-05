@@ -39,7 +39,7 @@ public sealed class OrderResultsConfirmedHandler(ITestRepository testRepository,
             }
             model.TestResults.Add(testResult);
         }
-        await pdfService.CreateOrderPdf(notification.Order, model);
+        _ = pdfService.CreateOrderPdf(notification.Order, model);
         notification.Order.Status = OrderStatus.PdfReady;
         await orderRepository.SaveChangesAsync();
         var customer = await customerRepository.GetAsync(r => r.Pesel == notification.Order.PatientData.Pesel);

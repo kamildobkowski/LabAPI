@@ -4,5 +4,6 @@ public enum OrderStatus
 {
 	Registered,
 	ResultsReady,
-	PdfReady
+	PdfReady,
+	ResultsAccepted
 }
