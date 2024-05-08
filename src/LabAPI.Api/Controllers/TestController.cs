@@ -57,9 +57,9 @@ public class TestController(IMediator mediator, ILogger<TestController> logger) 
 	}
 
 	[HttpGet]
-	public async Task<ActionResult<List<TestNoMarkersDto>>> GetAllNoMarkers()
+	public async Task<ActionResult<List<TestNoMarkersDto>>> GetAllNoMarkers([FromQuery] string? filter = null)
 	{
-		var list = await mediator.Send(new GetAllTestsNoMarkersQuery());
+		var list = await mediator.Send(new GetAllTestsNoMarkersQuery(filter));
 		return list;
 	}
 }
