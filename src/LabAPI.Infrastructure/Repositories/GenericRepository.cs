@@ -87,7 +87,7 @@ public abstract class GenericRepository<T>(CosmosClient cosmosClient, ILogger<Ge
 		var allItemsCount = dbContext.Set<T>().Count();
 		try
 		{
-			var list = PaginationQuery(page, pageSize, filterByLambda, orderBy, sortOrder).ToList();
+			var list = await PaginationQuery(page, pageSize, filterByLambda, orderBy, sortOrder).ToListAsync();
 			logger.LogInformation($"Get Page of {nameof(T)}");
 			return new PagedList<T>(list, page, pageSize, list.Count, allItemsCount);
 		}

@@ -1,9 +1,8 @@
 using LabAPI.Domain.Common;
-using LabAPI.Domain.Extensions;
 
 namespace LabAPI.Domain.ValueObjects;
 
-public sealed class Marker
+public sealed class Marker : ValueObject
 {
 	public Marker() { }
 	public Marker(string name,

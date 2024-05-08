@@ -2,7 +2,11 @@ using System.Configuration;
 using System.Data;
 using LabAPI.Domain.Common;
 using LabAPI.Domain.Entities;
+using LabAPI.Domain.ValueObjects;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace LabAPI.Infrastructure.Persistence;
 

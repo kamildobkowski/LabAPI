@@ -18,14 +18,14 @@ internal sealed class TestRepository(
 {
 	public async Task<PagedList<Test>> GetPageAsync(int page, int pageSize, string? filter, string? orderBy, bool sortOrder)
 	{
+		filter = filter?.ToLower();
 		return await base.GetPageAsync(
 			page,
 			pageSize,
 			r =>
 				filter==null || 
 				filter.IsNullOrEmpty() ||
-				r.Name.Contains(filter, StringComparison.CurrentCultureIgnoreCase) || 
-				r.ShortName.Contains(filter, StringComparison.CurrentCultureIgnoreCase),
+				r.Name.ToLower().Contains(filter) || r.ShortName.ToLower().Contains(filter),
 			orderBy, sortOrder);
 		}
 }
