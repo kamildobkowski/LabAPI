@@ -1,6 +1,6 @@
 using AutoMapper;
-using LabAPI.Application.Dtos.Tests;
 using LabAPI.Application.Features.Orders.Dtos;
+using LabAPI.Application.Features.Tests.Dtos;
 using LabAPI.Domain.Entities;
 using LabAPI.Domain.ValueObjects;
 
@@ -18,5 +18,6 @@ public class TestMappingProfile : Profile
 			.ForMember(r => r.Markers, c => c.MapFrom(s => s.Markers));
 		CreateMap<UpdateTestDto, Test>()
 			.ForMember(r => r.Markers, c => c.MapFrom(s => s.Markers));
+		CreateMap<Test, TestNoMarkersDto>();
 	}
 }

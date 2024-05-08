@@ -3,7 +3,7 @@ using LabAPI.Application.Features.Orders.Dtos;
 using LabAPI.Domain.Extensions;
 using LabAPI.Domain.Repositories;
 
-namespace LabAPI.Application.Dtos.Tests;
+namespace LabAPI.Application.Features.Tests.Dtos;
 
 public sealed record CreateTestDto
 {

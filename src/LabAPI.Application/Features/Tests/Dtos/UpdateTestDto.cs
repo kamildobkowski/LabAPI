@@ -1,11 +1,10 @@
 using FluentValidation;
 using LabAPI.Application.Features.Orders.Dtos;
-using LabAPI.Domain.Extensions;
 using LabAPI.Domain.Repositories;
 
-namespace LabAPI.Application.Dtos.Tests;
+namespace LabAPI.Application.Features.Tests.Dtos;
 
-public record UpdateTestDto
+public sealed record UpdateTestDto
 {
 	public string? ShortName { get; init; }
 	public string Name { get; init; } = null!;

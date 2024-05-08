@@ -1,7 +1,7 @@
 using FluentValidation;
 using FluentValidation.AspNetCore;
-using LabAPI.Application.Dtos.Tests;
 using LabAPI.Application.Features.Tests.Commands;
+using LabAPI.Application.Features.Tests.Dtos;
 using LabAPI.Application.Features.Tests.MappingProfiles;
 using Microsoft.Extensions.DependencyInjection;
 

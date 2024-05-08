@@ -1,5 +1,5 @@
-using LabAPI.Application.Dtos.Tests;
 using LabAPI.Application.Features.Tests.Commands;
+using LabAPI.Application.Features.Tests.Dtos;
 using LabAPI.Application.Features.Tests.Queries;
 using LabAPI.Domain.Common;
 using LabAPI.Domain.Enums;
@@ -46,13 +46,20 @@ public class TestController(IMediator mediator, ILogger<TestController> logger) 
 		return Ok();
 	}
 
-	[HttpGet]
-	public async Task<ActionResult<PagedList<TestDto>>> GetAll([FromQuery] int page = 1, [FromQuery] int pageSize = 20,
+	[HttpGet("page")]
+	public async Task<ActionResult<PagedList<TestDto>>> GetPage([FromQuery] int page = 1, [FromQuery] int pageSize = 20,
 		[FromQuery] string? filter = null, [FromQuery] string? orderBy = null, 
 		[FromQuery] bool asc = true)
 	{
 		logger.LogInformation("Get Tests Page endpoint invoked");
 		var pagedList = await mediator.Send(new GetAllTestsQuery(page, pageSize, filter, orderBy, asc));
 		return Ok(pagedList);
+	}
+
+	[HttpGet]
+	public async Task<ActionResult<List<TestNoMarkersDto>>> GetAllNoMarkers()
+	{
+		var list = await mediator.Send(new GetAllTestsNoMarkersQuery());
+		return list;
 	}
 }

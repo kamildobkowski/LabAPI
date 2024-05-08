@@ -24,8 +24,13 @@ public abstract class GenericRepository<T>(CosmosClient cosmosClient, ILogger<Ge
 		return await dbContext.Set<T>().FirstOrDefaultAsync(lambda);
 	}
 
-	public virtual async Task<List<T>> GetAllAsync(Expression<Func<T, bool>> lambda = default!)
-		=> await dbContext.Set<T>().Where(lambda).ToListAsync();
+	public virtual async Task<List<T>> GetAllAsync(Expression<Func<T, bool>>? lambda = default!)
+	{
+		var query = dbContext.Set<T>();
+		if (lambda is null)
+			return await query.ToListAsync();
+		return await query.Where(lambda).ToListAsync();
+	}
 
 	public virtual void CreateAsync(T entity)
 		=> dbContext.Set<T>().Add(entity);

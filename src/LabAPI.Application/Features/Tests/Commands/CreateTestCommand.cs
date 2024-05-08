@@ -1,5 +1,5 @@
 using AutoMapper;
-using LabAPI.Application.Dtos.Tests;
+using LabAPI.Application.Features.Tests.Dtos;
 using LabAPI.Domain.Entities;
 using LabAPI.Domain.Repositories;
 using MediatR;
