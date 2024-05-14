@@ -1,6 +1,7 @@
 using LabAPI.Domain.Common;
 using LabAPI.Domain.DomainEvents.Order;
 using LabAPI.Domain.Enums;
+using LabAPI.Domain.Extensions;
 using LabAPI.Domain.ValueObjects;
 
 namespace LabAPI.Domain.Entities;
