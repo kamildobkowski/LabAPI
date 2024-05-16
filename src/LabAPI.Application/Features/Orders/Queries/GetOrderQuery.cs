@@ -34,7 +34,7 @@ internal sealed class GetOrderQueryHandler(IOrderRepository repository, ITestRep
 					HigherNorm = marker.HigherNorm.ToString(),
 					Unit = marker.Unit,
 					ShortName = marker.ShortName,
-					Result = entity.Results[i]![marker.ShortName]
+					Result = entity.Results[i]?[marker.ShortName]
 				};
 				testDto.Markers.Add(markerDto);
 			}
