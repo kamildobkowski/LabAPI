@@ -1,5 +1,6 @@
 using LabAPI.Domain.Common;
 using LabAPI.Domain.Entities;
+using LabAPI.Domain.Enums;
 using LabAPI.Domain.Repositories;
 using LabAPI.Infrastructure.Persistence;
 using MediatR;
@@ -31,6 +32,21 @@ internal sealed class OrderRepository(CosmosClient cosmosClient, ILogger<OrderRe
 		entity.Id = s;
 		CreateAsync(entity);
 		return s;
+	}
+
+	public async Task<PagedList<Order>> GetPageAsync(int page, int pageSize, string? filter, string? orderBy, bool sortOrder, List<string>? statuses)
+	{
+		if (statuses is null) return await GetPageAsync(page, pageSize, filter, orderBy, sortOrder);
+		var statusList = statuses
+			.Select(s => Enum.TryParse<OrderStatus>(s, true, out var status) ? status : (OrderStatus?)null)
+			.Where(s => s.HasValue)
+			.Select(s => s.Value)
+			.ToList();
+		return await base.GetPageAsync(page, pageSize, r =>
+				(filter == null || r.OrderNumber == filter || r.PatientData.Surname.Contains(filter)) &&
+				(statuses.Count == 0 || statusList.Contains(r.Status)),
+			orderBy, sortOrder);
+
 	}
 
 	public async Task<PagedList<Order>> GetPageAsync(int page, int pageSize, string? filter, string? orderBy, bool sortOrder)

@@ -28,11 +28,11 @@ public sealed class OrderController(IMediator mediator, ILogger<OrderController>
 	public async Task<ActionResult<PagedList<OrderDto>>> GetPage([FromQuery] int page = 1,
 		[FromQuery] int pageSize = 20, [FromQuery] string? filterBy = null,
 		[FromQuery] string? filter = null, [FromQuery] string? orderBy = "OrderNumber",
-		[FromQuery] bool asc = true)
+		[FromQuery] bool asc = true, [FromQuery]List<string>? statuses = null)
 	{
 		logger.LogInformation("Get Page endpoint invoked");
 		var list = await mediator.Send(
-			new GetAllOrderQuery(page, pageSize, filterBy, filter, orderBy, asc));
+			new GetAllOrderQuery(page, pageSize, filterBy, filter, orderBy, asc, statuses));
 		return Ok(list);
 	}
 	

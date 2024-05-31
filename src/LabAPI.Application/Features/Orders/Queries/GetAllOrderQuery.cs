@@ -7,7 +7,7 @@ using MediatR;
 namespace LabAPI.Application.Features.Orders.Queries;
 
 public sealed record GetAllOrderQuery(int Page, int PageSize, string? FilterBy,
-	string? Filter, string? OrderBy, bool Asc) 
+	string? Filter, string? OrderBy, bool Asc, List<string>? Statuses) 
 	: IRequest<PagedList<OrderDto>>;
 	
 internal sealed class GetAllOrderQueryHandler (IOrderRepository repository, IMapper mapper)
@@ -16,7 +16,7 @@ internal sealed class GetAllOrderQueryHandler (IOrderRepository repository, IMap
 	public async Task<PagedList<OrderDto>> Handle(GetAllOrderQuery request, CancellationToken cancellationToken)
 	{
 		var list = await repository.GetPageAsync(request.Page, request.PageSize,
-			request.Filter, request.OrderBy, request.Asc);
+			request.Filter, request.OrderBy, request.Asc, request.Statuses);
 		var dtos = new PagedList<OrderDto>(mapper.Map<List<OrderDto>>(list.List), list.Page, list.PageSize, list.Count, list.AllItemsCount);
 		return dtos;
 	}
