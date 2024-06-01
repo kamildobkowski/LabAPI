@@ -1,6 +1,7 @@
 using LabAPI.Application.Features.Accounts.Commands;
 using LabAPI.Application.Features.Accounts.Dtos;
 using LabAPI.Application.Features.Accounts.Queries;
+using LabAPI.Domain.Common;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -35,5 +36,15 @@ public sealed class WorkerAccountController(IMediator mediator, ILogger<WorkerAc
 		logger.LogInformation("Worker Change Password endpoint invoked");
 		await mediator.Send(new ChangeWorkerPasswordCommand(dto));
 		return Ok();
+	}
+	
+	[HttpGet]
+	public async Task<ActionResult<PagedList<WorkerDto>>> GetPage([FromQuery] int page = 1, [FromQuery] int pageSize = 20,
+		[FromQuery] string? filter = null, [FromQuery] string? orderBy = null, 
+		[FromQuery] bool asc = true)
+	{
+		logger.LogInformation("Get Workers Page endpoint invoked");
+		var pagedList = await mediator.Send(new GetAllWorkersQuery(page, pageSize, filter, orderBy, asc));
+		return Ok(pagedList);
 	}
 }
