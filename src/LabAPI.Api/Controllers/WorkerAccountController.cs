@@ -48,4 +48,13 @@ public sealed class WorkerAccountController(IMediator mediator, ILogger<WorkerAc
 		var pagedList = await mediator.Send(new GetAllWorkersQuery(page, pageSize, filter, orderBy, asc));
 		return Ok(pagedList);
 	}
+	
+	[HttpDelete("{email}")]
+	[Authorize(Roles="Admin")]
+	public async Task<ActionResult> Delete(string email)
+	{
+		logger.LogInformation("Delete Worker endpoint invoked");
+		await mediator.Send(new DeleteWorkerCommand(email));
+		return Ok();
+	}
 }
