@@ -39,6 +39,7 @@ public sealed class WorkerAccountController(IMediator mediator, ILogger<WorkerAc
 	}
 	
 	[HttpGet]
+	[Authorize(Roles="Admin")]
 	public async Task<ActionResult<PagedList<WorkerDto>>> GetPage([FromQuery] int page = 1, [FromQuery] int pageSize = 20,
 		[FromQuery] string? filter = null, [FromQuery] string? orderBy = null, 
 		[FromQuery] bool asc = true)
