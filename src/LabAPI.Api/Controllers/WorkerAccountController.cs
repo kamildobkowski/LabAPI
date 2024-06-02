@@ -57,4 +57,13 @@ public sealed class WorkerAccountController(IMediator mediator, ILogger<WorkerAc
 		await mediator.Send(new DeleteWorkerCommand(email));
 		return Ok();
 	}
+	
+	[HttpPost("{email}")]
+	[Authorize(Roles="Admin")]
+	public async Task<ActionResult<string>> ResetPassword(string email)
+	{
+		logger.LogInformation("Reset Worker Password endpoint invoked");
+		var password = await mediator.Send(new ResetWorkerPasswordCommand(email));
+		return Ok(password);
+	}
 }
