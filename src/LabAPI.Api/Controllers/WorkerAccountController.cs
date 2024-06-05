@@ -58,7 +58,7 @@ public sealed class WorkerAccountController(IMediator mediator, ILogger<WorkerAc
 		return Ok();
 	}
 	
-	[HttpPost("{email}")]
+	[HttpPost("resetPassword/{email}")]
 	[Authorize(Roles="Admin")]
 	public async Task<ActionResult<string>> ResetPassword(string email)
 	{

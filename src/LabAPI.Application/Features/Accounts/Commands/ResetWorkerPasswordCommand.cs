@@ -8,7 +8,7 @@ namespace LabAPI.Application.Features.Accounts.Commands;
 
 public sealed record ResetWorkerPasswordCommand(string Email) : IRequest<string>;
 
-internal sealed class ResetWorkerPasswordCommandHandler(IWorkerRepository repository, IPasswordHasher<Worker> hasher)
+internal sealed class ResetWorkerPasswordCommandHandler(IWorkerRepository repository, IPasswordHasher<User> hasher)
     : IRequestHandler<ResetWorkerPasswordCommand, string>
 {
     public async Task<string> Handle(ResetWorkerPasswordCommand request, CancellationToken cancellationToken)

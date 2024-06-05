@@ -16,19 +16,19 @@ public class ErrorHandlingMiddleware(ILogger<ErrorHandlingMiddleware> logger) : 
 		{
 			context.Response.StatusCode = StatusCodes.Status404NotFound;
 			await context.Response.WriteAsync(e.Message);
-			logger.LogError(e.Message, e);
+			//logger.LogError(e.Message, e);
 		}
 		catch (UnauthorizedException e)
 		{
 			context.Response.StatusCode = StatusCodes.Status401Unauthorized;
 			await context.Response.WriteAsync(e.Message);
-			logger.LogError(e.Message, e);
+			//logger.LogError(e.Message, e);
 		}
 		catch (Exception e)
 		{
 			context.Response.StatusCode = StatusCodes.Status500InternalServerError;
 			await context.Response.WriteAsync(e.Message);
-			logger.LogError(e.Message, e);
+			//logger.LogError(e.Message, e);
 		}
 	}
 }

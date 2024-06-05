@@ -39,7 +39,7 @@ public abstract class GenericRepository<T>(CosmosClient cosmosClient, ILogger<Ge
 	{
 		entity.ModifiedAt = DateTime.UtcNow;
 		dbContext.Set<T>().Update(entity);
-		logger.LogInformation($"Updated entity {nameof(T)} with id {entity.Id}");
+		// logger.LogInformation($"Updated entity {nameof(T)} with id {entity.Id}");
 	}
 
 	public virtual void DeleteAsync(T entity)
